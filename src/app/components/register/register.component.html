@@ -1,0 +1,6 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <input type="text" class="form-control" id="name" formControlName="name"/>
+    <input type="email" class="form-control" id="email" formControlName="email" />
+    <input type="password" class="form-control" id="password" formControlName="password" minlength="8" />
+    <button class="btn btn-primary w-50">Confirmar</button>
+</form>
