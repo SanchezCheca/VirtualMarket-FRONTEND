@@ -1,1 +1,6 @@
-<p>login works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <input type="email" class="form-control" id="email" formControlName="email" placeholder="Correo" />
+    <input type="password" class="form-control" id="password" formControlName="password" minlength="8" placeholder="Contraseña" />
+    <button>Confirmar</button>
+    {{message}}
+</form>

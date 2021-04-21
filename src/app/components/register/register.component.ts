@@ -27,10 +27,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get formulario() { return this.registerForm.controls; }
+  get form() { return this.registerForm.controls; }
 
   onSubmit() {
-    alert('Hola');
     this.submitted = true;
     if (this.registerForm.invalid) {
       return;
@@ -40,12 +39,6 @@ export class RegisterComponent implements OnInit {
     const email = userData.email;
     const password = userData.password;
 
-    this.registerSubscription(name, email, password);
-    this.onReset();
-    this.message = this.registerService.message;
-  }
-
-  registerSubscription(name: string, email: string, password: string) {
     this.registerService.Register(name, email, password).subscribe(
       (response: any) => {
         console.log(response);
@@ -55,6 +48,9 @@ export class RegisterComponent implements OnInit {
         console.log(error.message);
       }
     );
+
+    this.onReset();
+    this.message = this.registerService.message;
   }
 
   onReset() {
