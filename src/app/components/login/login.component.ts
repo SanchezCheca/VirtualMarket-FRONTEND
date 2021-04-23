@@ -8,6 +8,12 @@ import { LoginService } from 'src/app/services/auth/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
+/**
+ * COMPONENT DESCRIPTION:
+ * Complete view for user sign up
+ */
+
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;

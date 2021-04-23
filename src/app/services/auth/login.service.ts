@@ -7,6 +7,12 @@ import * as _ from "lodash";
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * SERVICE DESCRIPTION:
+ * Logic for back-end communication for user log-in and session management
+ */
+
 export class LoginService {
 
   //Login data is stored in session
