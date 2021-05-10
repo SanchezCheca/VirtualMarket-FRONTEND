@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { IndexComponent } from './components/index/index.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -8,8 +9,8 @@ import { RegisterComponent } from './components/register/register.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: RegisterComponent},
-  {path: 'inicio', component: LoginComponent},
-  {path: '', component: AppComponent},
+  {path: 'inicio', component: IndexComponent},
+  {path: '', component: IndexComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

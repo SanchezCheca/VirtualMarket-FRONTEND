@@ -9,6 +9,11 @@ import { RegisterService } from 'src/app/services/auth/register.service';
   styleUrls: ['./register.component.scss']
 })
 
+/**
+ * COMPONENT DESCRIPTION:
+ * Complete view for user sign up
+ */
+
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;

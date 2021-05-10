@@ -6,6 +6,12 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * SERVICE DESCRIPTION:
+ * Logic for back-end communication for user sign up
+ */
+
 export class RegisterService {
 
   public static readonly SESSION_STORAGE_KEY: string = "apiPassport";
