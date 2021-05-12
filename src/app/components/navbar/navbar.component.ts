@@ -14,10 +14,12 @@ import { LoginService } from 'src/app/services/auth/login.service';
 
 export class NavbarComponent implements OnInit {
 
+  user: any;
   logged: boolean;
 
   constructor(private loginService: LoginService) {
     this.logged = false;
+    this.user = loginService.getUser();
   }
 
   ngOnInit(): void {

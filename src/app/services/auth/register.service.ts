@@ -20,13 +20,14 @@ export class RegisterService {
 
   constructor(private router: Router, private http: HttpClient) {
     this.user = {
+      username: "",
       name: "",
       email: ""
     }
     this.message = "";
   }
 
-  public Register = (name: string, email: string, password: string) => {
+  public Register = (username: string, name: string, email: string, password: string) => {
     const url = environment.dirBack + "register";
 
     let headers = new HttpHeaders({
@@ -34,6 +35,6 @@ export class RegisterService {
       'Access-Control-Allow-Origin': '*'
     });
 
-    return this.http.post(url, { 'name' : name, 'email': email, 'password': password }, { headers: headers });
+    return this.http.post(url, {'username' : username, 'name' : name, 'email': email, 'password': password }, { headers: headers });
   }
 }

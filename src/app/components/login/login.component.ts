@@ -23,12 +23,14 @@ export class LoginComponent implements OnInit {
 
   constructor(private loginService: LoginService, private formBuilder: FormBuilder, private router: Router) {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required]],
+      emailorusername: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
     
     this.user = {
       access_token: "",
+      id: "",
+      username: "",
       name: "",
       email: ""
     }
@@ -37,44 +39,41 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("hola");
     //If user is already logged, return to index page
     if (this.loginService.isUserSignedIn()) {
-      console.log("logueado");
       this.router.navigate(['/inicio']);
-    } else {
-      console.log("no logueado");
     }
   }
 
   get form() { return this.loginForm.controls; }
 
   onSubmit() {
-    console.log("datos recogidos");
     this.submitted = true;
     if (this.loginForm.invalid) {
       return;
     }
     let userData = this.loginForm.value;
-    const email = userData.email;
+    const emailorusername = userData.emailorusername;
     const password = userData.password;
     this.onReset();
 
-    this.login(email, password);
+    this.login(emailorusername, password);
   }
 
   //Login subscription using login.service
-  login(email: string, password: string) {
-    this.loginService.login(email, password).subscribe(
+  login(emailorusername: string, password: string) {
+    this.loginService.login(emailorusername, password).subscribe(
       (response: any) => {
-        console.log(response.message);
+        //console.log(response.message);
         this.message = "Login correcto";
-        this.user.access_token = response['message']['access_token'];
-        this.user.email = response.message.user.email;
 
         //Save user data
-        this.user.name = response.message.datos_user.name;
-        this.user.email = response.message.datos_user.email;
+        this.user.access_token = response['message']['access_token'];
+        this.user.id = response.message.user.id;
+        this.user.username = response.message.user.username;
+        this.user.name = response.message.user.name;
+        this.user.email = response.message.user.email;
+        console.log(this.user);
 
         //Save user in session
         this.loginService.saveUser(this.user);
