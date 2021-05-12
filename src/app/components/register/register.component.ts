@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private registerService: RegisterService, private formBuilder: FormBuilder, private router: Router) {
     this.registerForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
       name: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -40,14 +41,15 @@ export class RegisterComponent implements OnInit {
       return;
     }
     let userData = this.registerForm.value;
+    const username = userData.username;
     const name = userData.name;
     const email = userData.email;
     const password = userData.password;
 
-    this.registerService.Register(name, email, password).subscribe(
+    this.registerService.Register(username, name, email, password).subscribe(
       (response: any) => {
+        this.message = response.message.message;
         console.log(response);
-        //this.router.navigate(['inicio']);
       },
       (error) => {
         console.log(error.message);

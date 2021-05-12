@@ -21,14 +21,14 @@ export class LoginService {
   constructor(private router: Router, private http: HttpClient) {}
 
   //Login petition
-  public login = (email: string, password: string) => {
+  public login = (emailorusername: string, password: string) => {
     const url = environment.dirBack + 'login';
 
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
     
-    return this.http.post(url, { 'email': email, 'password': password }, { headers: headers });
+    return this.http.post(url, { 'emailorusername': emailorusername, 'password': password }, { headers: headers });
   }
 
   //Check if user is logged and stores its data
@@ -45,6 +45,7 @@ export class LoginService {
   public getUser(): any {
     let user: any | null = {
       access_token: "",
+      username: "",
       name: "",
       email: ""
     };
@@ -52,6 +53,7 @@ export class LoginService {
       user = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);
       user = JSON.parse(user);
     }
+    //console.log(user);
     return user;
   }
 

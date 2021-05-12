@@ -2,12 +2,12 @@
 <div class="row mt-2">
     <div class="col-12 col-md-6 col-lg-4 form-group mx-auto p-2 border rounded">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Correo electrónico o nombre de usuario" />
+            <input type="text" class="form-control" id="emailorusername" formControlName="emailorusername" placeholder="Correo electrónico o nombre de usuario" />
             <input type="password" class="form-control mt-2" id="password" formControlName="password" minlength="8" placeholder="Contraseña" />
             <button type="submit" class="btn btn-primary mt-2 mx-auto w-100">Confirmar</button>
             <p class="mt-2 text-center">¿No tienes cuenta? <a href="/signup">Crear cuenta</a>
-            <br>
-            <a href="/forgotpassword">He olvidado mi contraseña</a>
+                <br>
+                <a href="/forgotpassword">He olvidado mi contraseña</a>
             </p>
             {{message}}
         </form>
