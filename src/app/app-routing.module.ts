@@ -6,8 +6,10 @@ import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
+  {path: 'upload', component: UploadComponent},
   {path: 'user/:username', component: ProfileComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: RegisterComponent},
