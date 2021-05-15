@@ -19,12 +19,14 @@ export class UploadService {
   }
 
   //Sube una imagen
-  public uploadImage = (image: any) => {
+  public uploadImage = (image: any, price: any) => {
     const url = environment.dirBack + "uploadImage";
     const fd = new FormData;
     fd.append('image', image, image.name);
+    fd.append('price', price);
+    
     let headers = new HttpHeaders({ Authorization: `Bearer ${this.loginService.getUser().access_token}` });
-    return this.http.post(url, fd, {headers: headers});
+    return this.http.post(url, fd, {headers: headers, reportProgress: true, observe: 'events'});
   }
 
 }

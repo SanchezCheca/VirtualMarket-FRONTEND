@@ -1,3 +1,4 @@
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,11 +16,15 @@ export class UploadComponent implements OnInit {
   submitted = false;
   message: string;
 
+  uploadProgress: number;
+
   constructor(private formbuilder: FormBuilder, private router: Router, private UploadService: UploadService) {
     this.uploadForm = this.formbuilder.group({
-      image: ['', Validators.required]
+      image: ['', Validators.required],
+      price: [, Validators.required]
     });
     this.message = "";
+    this.uploadProgress = 0;
   }
   
   get form() {return this.uploadForm.controls;}
@@ -44,14 +49,22 @@ export class UploadComponent implements OnInit {
     if (this.uploadForm.invalid){
       return;
     }
-    this.UploadService.uploadImage(this.image).subscribe(
-      (response: any) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    let data = this.uploadForm.value;
+    const price = data.price;
+    if (this.image) {
+      this.UploadService.uploadImage(this.image, price).subscribe(
+        (event: any) => {
+          if (event.type == HttpEventType.UploadProgress) {
+            this.uploadProgress = Math.round(100 * (event.loaded / event.total));
+          }
+          if (event.type == HttpEventType.Response) {
+            console.log(event);
+            this.message = event.body.message.message;
+          }
+        }
+      );
+    }
+    
   }
 
 }
