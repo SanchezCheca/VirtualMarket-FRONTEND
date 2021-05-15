@@ -13,6 +13,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { IndexComponent } from './components/index/index.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { FooterComponent } from './components/footer/footer.component';
     IndexComponent,
     ProfileComponent,
     FooterComponent,
+    UploadComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-index',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  images = '';
+
+  constructor(private searchService: SearchService) { }
 
   ngOnInit(): void {
+    //Carga las últimas imágenes subidas
+    let images = this.searchService.getLasts();
+    //console.log(images);
   }
 
 }
