@@ -14,7 +14,7 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     //Carga las últimas imágenes subidas
-    let images = this.searchService.getLasts();
+    //let images = this.searchService.getLasts();
     //console.log(images);
   }
 

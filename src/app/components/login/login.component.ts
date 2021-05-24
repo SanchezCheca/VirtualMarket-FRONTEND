@@ -26,13 +26,14 @@ export class LoginComponent implements OnInit {
       emailorusername: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
-    
+
     this.user = {
       access_token: "",
       id: "",
       username: "",
       name: "",
-      email: ""
+      email: "",
+      rol: "",
     }
 
     this.message = "";
