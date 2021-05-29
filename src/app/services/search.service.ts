@@ -14,14 +14,13 @@ export class SearchService {
   /**
    * Devuelve las últimas 50 imágenes subidas al servidor
    */
-  public getLasts() {
-    const url = environment.dirBack + "search/getLasts";
+  public getLastImages() {
+    const url = environment.dirBack + "search/getLastImages";
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
     let respuesta = this.http.get(url, { headers: headers });
-    console.log(respuesta);
     return respuesta;
   }
 

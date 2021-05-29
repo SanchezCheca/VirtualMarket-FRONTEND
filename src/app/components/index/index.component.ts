@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from 'src/app/services/search.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-index',
@@ -8,14 +9,30 @@ import { SearchService } from 'src/app/services/search.service';
 })
 export class IndexComponent implements OnInit {
 
-  images = '';
+  images: any[] = [];
+  imageRoutes = '';
+  publicDirBack = '';
 
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService) {
+    this.publicDirBack = environment.publicDirBack;
+  }
 
   ngOnInit(): void {
-    //Carga las últimas imágenes subidas
-    //let images = this.searchService.getLasts();
-    //console.log(images);
+    this.getLastImages();
+  }
+
+  //Recupera las últimas imágenes subidas haciendo uso del SearchService
+  getLastImages() {
+    this.searchService.getLastImages().subscribe(
+      (response: any) => {
+        this.images = response.message;
+        //this.imageRoutes = environment.publicDirBack + 'thumbnail/' + this.images;
+        console.log(this.images);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
 }
