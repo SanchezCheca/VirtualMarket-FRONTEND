@@ -1,6 +1,17 @@
 .bg-nav {
     background-color: rgb(80, 218, 80);
 }
-.dropdown-item:active{
+
+.dropdown-item:active {
     background-color: rgb(56, 95, 56);
+}
+
+.marca {
+    position: absolute !important;
+    left: 46% !important;
+}
+
+.derecha {
+    position: absolute !important;
+    right: 0% !important;
 }

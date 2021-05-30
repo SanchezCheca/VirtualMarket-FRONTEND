@@ -27,7 +27,7 @@ export class LoginService {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    
+
     return this.http.post(url, { 'emailorusername': emailorusername, 'password': password }, { headers: headers });
   }
 
@@ -47,7 +47,8 @@ export class LoginService {
       access_token: "",
       username: "",
       name: "",
-      email: ""
+      email: "",
+      rol: ""
     };
     if (this.isUserSignedIn()) {
       user = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);

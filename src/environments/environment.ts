@@ -4,6 +4,8 @@
 
 export const environment = {
   dirBack: 'http://127.0.0.1:8000/api/',
+  publicDirBack: 'http://127.0.0.1:8000/',
+  //dirBack: 'http://http://46.183.114.96/api/',
   production: false
 };
 
