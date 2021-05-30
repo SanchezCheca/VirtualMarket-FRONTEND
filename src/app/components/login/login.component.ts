@@ -74,6 +74,8 @@ export class LoginComponent implements OnInit {
         this.user.username = response.message.user.username;
         this.user.name = response.message.user.name;
         this.user.email = response.message.user.email;
+        this.user.rol = response.message.user.rol;
+        this.user.balance = response.message.user.balance;
         console.log(this.user);
 
         //Save user in session
