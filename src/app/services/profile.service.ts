@@ -14,11 +14,27 @@ export class ProfileService {
   public getUserData = (username: any) => {
     const url = environment.dirBack + 'getUserData';
 
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
+    let headers = new HttpHeaders({ Authorization: `Bearer ${this.loginService.getUser().access_token}`, 'Content-Type': 'application/json'});
 
-    return this.http.post(url, { 'username': username}, { headers: headers });
+    return this.http.post(url, { 'username': username }, { headers: headers });
+  }
+
+  //El usuario iniciado sigue al usuario con el nombre especificado
+  public follow = (username: any) => {
+    const url = environment.dirBack + 'followUser';
+
+    let headers = new HttpHeaders({ Authorization: `Bearer ${this.loginService.getUser().access_token}`, 'Content-Type': 'application/json'});
+
+    return this.http.post(url, { 'username': username }, { headers: headers });
+  }
+
+  //El usuario iniciado deja de seguir al usuario con el nombre especificado
+  public unfollow = (username: any) => {
+    const url = environment.dirBack + 'unfollowUser';
+
+    let headers = new HttpHeaders({ Authorization: `Bearer ${this.loginService.getUser().access_token}`, 'Content-Type': 'application/json'});
+
+    return this.http.post(url, { 'username': username }, { headers: headers });
   }
 
 }

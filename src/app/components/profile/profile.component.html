@@ -12,10 +12,11 @@
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head">
                     <div class="profile mr-3"><img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" alt="..." width="130" class="rounded mb-2 img-thumbnail">
-                        <a *ngIf="isLoggedUser" href="#" class="btn btn-outline-dark btn-sm btn-block">Editar perfil</a></div>
-                    <div *ngIf="logged && !isLoggedUser">
-                        <button *ngIf="!userData.isFollowing">Seguir</button>
-                        <button *ngIf="userData.isFollowing">Dejar de seguir</button>
+                        <a *ngIf="isLoggedUser" href="#" class="btn btn-outline-dark btn-sm btn-block">Editar perfil</a>
+                        <div *ngIf="logged && !isLoggedUser">
+                            <button class="btn btn-outline-dark btn-sm btn-block" *ngIf="!userData.isFollowing" (click)="follow()">Seguir</button>
+                            <button class="btn btn-dark btn-sm btn-block" *ngIf="userData.isFollowing" (mouseover)="siguiendoIN()" (mouseout)="siguiendoOUT()" (click)="unfollow()">{{textoSiguiendo}}</button>
+                        </div>
                     </div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0">{{userData.name}}</h4>
@@ -29,26 +30,25 @@
                         <h5 class="font-weight-bold mb-0 d-block">{{userData.nImages}}</h5><small class="text-muted" *ngIf="userData.nImages == 1"> <i class="fas fa-image mr-1"></i>Imagen</small><small class="text-muted" *ngIf="userData.nImages != 1"> <i class="fas fa-image mr-1"></i>Imágenes</small>
                     </li>
                     <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">745</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Seguidores</small>
+                        <h5 class="font-weight-bold mb-0 d-block">{{userData.nFollowers}}</h5><small *ngIf="userData.nFollowers != 1" class="text-muted"> <i class="fas fa-user mr-1"></i>Seguidores</small><small *ngIf="userData.nFollowers == 1" class="text-muted"> <i class="fas fa-user mr-1"></i>Seguidor</small>
                     </li>
                     <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">340</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Siguiendo</small>
+                        <h5 class="font-weight-bold mb-0 d-block">{{userData.nFollowing}}</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Siguiendo</small>
                     </li>
                 </ul>
             </div>
             <div class="px-4 py-3">
                 <h5 class="mb-0">Sobre mí</h5>
                 <div class="p-4 rounded shadow-sm bg-light">
-                    <p class="font-italic mb-0">Web Developer</p>
-                    <p class="font-italic mb-0">Lives in New York</p>
-                    <p class="font-italic mb-0">Photographer</p>
+                    <p class="font-italic mb-0">Me gusta hacer dinero</p>
                 </div>
             </div>
             <div class="py-4 px-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h5 class="mb-0">Imágenes recientes</h5><a href="/user/{{username}}/images" class="btn btn-link text-muted">Mostrar todo</a>
+                    <h5 class="mb-0">Imágenes recientes</h5><a *ngIf="userData.userImages.length != 0" href="/user/{{username}}/images" class="btn btn-link text-muted">Mostrar todo</a>
                 </div>
                 <div class="row">
+                    <div *ngIf="userData.userImages.length == 0" class="col-12 text-center"><i>No hay ninguna imagen.</i></div>
                     <div *ngFor="let image of userData.userImages" class="col-lg-6 mb-2 pr-lg-1"><img src="{{publicDirBack}}thumbnail/{{image.filename}}" alt="" class="img-fluid rounded"></div>
                 </div>
             </div>
