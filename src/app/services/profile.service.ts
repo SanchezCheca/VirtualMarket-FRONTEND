@@ -10,6 +10,14 @@ export class ProfileService {
 
   constructor(private loginService: LoginService, private http: HttpClient) { }
 
+  public updateUser = (username: any, name: any, email: any) => {
+    const url = environment.dirBack + 'updateUser/' + username;
+
+    let headers = new HttpHeaders({ Authorization: `Bearer ${this.loginService.getUser().access_token}`, 'Content-Type': 'application/json'});
+
+    return this.http.post(url, { 'username': username, 'name': name, 'email': email }, { headers: headers });
+  }
+
   //Devuelve la información necesaria para mostrar de un usuario
   public getUserData = (username: any) => {
     const url = environment.dirBack + 'getUserData';
