@@ -2,12 +2,12 @@
 <div class="row my-2 px-3">
     <div class="col-12">
         <div class="grid-gallery">
-            <a class="grid-gallery__item" href="#" *ngFor="let image of images">
+            <div class="grid-gallery__item box imageHolder" *ngFor="let image of images">
                 <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
-                <span class="caption simple-caption">
+                <span class="caption">
                   <p>¡Hola mundo!</p>
                 </span>
-            </a>
+            </div>
         </div>
     </div>
 </div>
