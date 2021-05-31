@@ -1,5 +1,5 @@
 .bg-nav {
-    background-color: rgb(80, 218, 80);
+    background-color: rgb(151, 228, 151);
 }
 
 .dropdown-item:active {
@@ -14,4 +14,11 @@
 .derecha {
     position: absolute !important;
     right: 0% !important;
+}
+
+.perfilRedondo {
+    height: 2em;
+    width: 2em;
+    object-fit: cover;
+    border-radius: 50%;
 }

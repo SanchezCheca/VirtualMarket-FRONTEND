@@ -1,0 +1,29 @@
+.botonBuscar {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.barraBuscar {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.formulario {
+    text-align: center;
+    width: 100%;
+}
+
+@media all and (max-width: 992px) {
+    .barraBuscar {
+        width: 75% !important;
+    }
+}
+
+@media all and (max-width: 568px) {
+    .barraBuscar {
+        width: 100% !important;
+    }
+    .botonBuscar {
+        width: 100% !important;
+    }
+}

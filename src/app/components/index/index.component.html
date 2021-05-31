@@ -1,13 +1,19 @@
 <app-navbar></app-navbar>
-<div class="row my-2 px-3">
+<div class="row mb-2 mx-0">
+    <div class="col-12 portada">
+        <app-search></app-search>
+    </div>
+</div>
+<div class="row my-3 px-3 mx-0">
     <div class="col-12">
         <div class="grid-gallery w-100">
             <a class="grid-gallery__item imageHolder" href="#" *ngFor="let image of images">
                 <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
                 <span class="caption">
-                  <p>¡Hola mundo!</p>
+                  <p>{{image.price}}€</p>
                 </span>
             </a>
         </div>
     </div>
 </div>
+<app-footer></app-footer>

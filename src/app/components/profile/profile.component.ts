@@ -17,7 +17,8 @@ export class ProfileComponent implements OnInit {
   username: any;  //Nombre de usuario del perfil que se está mirando
   isLoggedUser: any;  //Si el perfil del usuario que se está mirando es el que ha iniciado sesión
   userData: any;  //Información útil para mostrar del usuario
-  publicDirBack: any;
+  profileImage: any; //url a la imagen de perfil
+  publicDirBack: any; //Directorio al back para ser usado por la plantilla html
 
   constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private loginService: LoginService, private profileService: ProfileService) {
     this.textoSiguiendo = 'Siguiendo';
@@ -35,6 +36,8 @@ export class ProfileComponent implements OnInit {
     };
     //Inicializa el directorio público del back para que sea usado por la plantilla en las imágenes
     this.publicDirBack = environment.publicDirBack;
+    //Imagen de perfil por defecto
+    this.profileImage = '/assets/img/defaultUserImage.png';
   }
 
   ngOnInit(): void {

@@ -10,8 +10,10 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class EditProfileComponent implements OnInit {
 
+  image: any; //Recurso de imagen para subirla
   user: any;
   editProfileForm: FormGroup;
+  profileImage: any;  //url de la imagen de perfil
 
   constructor(private profileService: ProfileService, private loginService: LoginService, private formBuilder: FormBuilder) {
     this.user = this.loginService.getUser();
@@ -19,7 +21,9 @@ export class EditProfileComponent implements OnInit {
       username: [this.user.username],
       name: [this.user.name, [Validators.required]],
       email: [this.user.email, [Validators.required]],
+      image: ['', Validators.required]
     });
+    this.profileImage = 'http://localhost:8000/defaultUserImage.png';
   }
 
   ngOnInit(): void {
@@ -43,6 +47,19 @@ export class EditProfileComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  /**
+   * Se ha seleccionado una imagen, la guarda
+   * @param event
+   */
+   saveImage(event: any) {
+    this.image = <File>event.target.files[0];
+
+    const reader = new FileReader();
+    reader.onload = e => this.profileImage = reader.result;
+
+    reader.readAsDataURL(this.image);
   }
 
 }

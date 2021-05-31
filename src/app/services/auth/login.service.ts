@@ -49,7 +49,8 @@ export class LoginService {
       name: "",
       email: "",
       rol: "",
-      balance: 0
+      balance: 0,
+      profileImage: ""
     };
     if (this.isUserSignedIn()) {
       user = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);

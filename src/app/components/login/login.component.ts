@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
       name: "",
       email: "",
       rol: "",
+      profileImage: "",
     }
 
     this.message = "";
@@ -76,6 +77,7 @@ export class LoginComponent implements OnInit {
         this.user.email = response.message.user.email;
         this.user.rol = response.message.user.rol;
         this.user.balance = response.message.user.balance;
+        this.user.profileImage = response.message.user.profileImage;
         console.log(this.user);
 
         //Save user in session
