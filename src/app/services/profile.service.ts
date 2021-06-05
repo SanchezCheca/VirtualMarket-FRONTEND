@@ -55,4 +55,14 @@ export class ProfileService {
     return this.http.post(url, { 'username': username }, { headers: headers });
   }
 
+  public resetPassword = (currentPassword: any, newPassword: any) => {
+    let username = this.loginService.getUser().username;
+
+    const url = environment.dirBack + 'resetPassword';
+
+    let headers = new HttpHeaders({ Authorization: `Bearer ${this.loginService.getUser().access_token}`, 'Content-Type': 'application/json'});
+
+    return this.http.post(url, { 'username': username, 'currentPassword': currentPassword, 'newPassword': newPassword }, { headers: headers });
+  }
+
 }

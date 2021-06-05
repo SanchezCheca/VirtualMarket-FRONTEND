@@ -14,6 +14,7 @@ export class EditProfileComponent implements OnInit {
   image: any; //Recurso de imagen para subirla
   user: any;
   editProfileForm: FormGroup;
+  resetPasswordForm: FormGroup;
   profileImage: any;  //url de la imagen de perfil
 
   constructor(private profileService: ProfileService, private loginService: LoginService, private formBuilder: FormBuilder) {
@@ -32,12 +33,22 @@ export class EditProfileComponent implements OnInit {
       this.profileImage = 'http://localhost:8000/defaultUserImage.png';
     }
 
+    this.resetPasswordForm = this.formBuilder.group({
+      currentPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required]],
+      newPassword2: ['']
+    })
+
   }
 
   ngOnInit(): void {
 
   }
 
+  /**
+   * Botón 'guardar cambios'
+   * @returns
+   */
   onSubmit() {
     if (this.editProfileForm.invalid) {
       return;
@@ -60,6 +71,28 @@ export class EditProfileComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  /**
+   * Botón 'cambiar contraseña'
+   */
+  onSubmitPassword() {
+    if (this.resetPasswordForm.invalid) {
+      return;
+    }
+    let passwordData = this.resetPasswordForm.value;
+    const currentPassword = passwordData.currentPassword;
+    const newPassword = passwordData.newPassword;
+
+    this.profileService.resetPassword(currentPassword, newPassword).subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+
   }
 
   /**

@@ -42,7 +42,19 @@
                     </div>
                 </div>-->
             </form>
+            <!--Apartado cambiar contraseña-->
+            <div class="p-5">
+                <h5 class="mb-0">Cambiar contraseña</h5>
+                <form [formGroup]="resetPasswordForm" (ngSubmit)="onSubmitPassword()" class="w-50">
+                    <input type="password" class="form-control mt-2" id="currentPassword" formControlName="currentPassword" minlength="8" placeholder="Contraseña actual" />
+                    <input type="password" class="form-control mt-2" id="newPassword" formControlName="newPassword" minlength="8" placeholder="Nueva contraseña" />
+                    <input type="password" class="form-control mt-2" id="newPassword2" formControlName="newPassword2" minlength="8" placeholder="Repite la nueva contraseña" />
+                    <button type="submit" class="btn btn-dark mt-2">Cambiar contraseña</button>
+                </form>
+            </div>
+
+
         </div>
     </div>
 </div>
-<app-footer class="fixed-bottom"></app-footer>
+<app-footer></app-footer>
