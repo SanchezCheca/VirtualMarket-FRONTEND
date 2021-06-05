@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     if (this.user.profileImage == null) {
       this.user.profileImage = '/assets/img/defaultUserImage.png';
     } else {
-      this.user.profileImage = environment.publicDirBack + 'profileImages/' + this.user.profileImage;
+      this.user.profileImage = environment.publicDirBack + 'profileImage/' + this.user.profileImage;
     }
   }
 

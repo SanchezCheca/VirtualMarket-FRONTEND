@@ -10,12 +10,22 @@ export class ProfileService {
 
   constructor(private loginService: LoginService, private http: HttpClient) { }
 
-  public updateUser = (username: any, name: any, email: any) => {
+  //Actualiza la información de un usuario
+  public updateUser = (username: any, name: any, email: any, about: any, image: any) => {
     const url = environment.dirBack + 'updateUser/' + username;
 
-    let headers = new HttpHeaders({ Authorization: `Bearer ${this.loginService.getUser().access_token}`, 'Content-Type': 'application/json'});
+    let headers = new HttpHeaders({ Authorization: `Bearer ${this.loginService.getUser().access_token}`});
 
-    return this.http.post(url, { 'username': username, 'name': name, 'email': email }, { headers: headers });
+    const fd = new FormData;
+    if (image){
+      fd.append('image', image, image.name);
+    }
+    fd.append('username', username);
+    fd.append('name', name);
+    fd.append('email', email);
+    fd.append('about',about);
+
+    return this.http.post(url, fd, {headers: headers});
   }
 
   //Devuelve la información necesaria para mostrar de un usuario

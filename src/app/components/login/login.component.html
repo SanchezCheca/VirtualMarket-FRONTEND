@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="row mt-2 mx-0">
+<div class="row mt-4 mx-0 h-100">
     <div class="col-12 col-md-6 col-lg-4 form-group mx-auto p-2 border rounded">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <input type="text" class="form-control" id="emailorusername" formControlName="emailorusername" placeholder="Correo electrónico o nombre de usuario" />
@@ -13,3 +13,4 @@
         </form>
     </div>
 </div>
+<app-footer class="fixed-bottom"></app-footer>

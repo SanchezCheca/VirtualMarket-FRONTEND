@@ -1,1 +1,25 @@
-<p>search-result works!</p>
+<app-navbar></app-navbar>
+<div class="row bg-dark p-2 mx-0">
+    <div class="col-12">
+        <app-search></app-search>
+    </div>
+</div>
+
+<app-filters></app-filters>
+
+<div class="row my-3 px-3 mx-0">
+    <div class="col-12">
+        <h4 class="h4">Resultados de la búsqueda: perro</h4>
+    </div>
+    <div class="col-12">
+        <div class="grid-gallery w-100">
+            <a class="grid-gallery__item imageHolder" href="#" *ngFor="let image of images">
+                <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
+                <span class="caption">
+                  <p>{{image.price}}€</p>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+<app-footer class="fixed-bottom"></app-footer>

@@ -19,6 +19,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { SearchComponent } from './components/search/search.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
+import { ImageProductComponent } from './components/image-product/image-product.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SearchResultComponent } from './components/search-result/search-result.
     SearchComponent,
     FiltersComponent,
     SearchResultComponent,
+    ImageProductComponent,
   ],
   imports: [
     BrowserModule,

@@ -32,7 +32,9 @@ export class ProfileComponent implements OnInit {
       'nImages': 0,
       'userImages': [],
       'nFollowers': 0,
-      'nFollowing': 0
+      'nFollowing': 0,
+      'about': '',
+      'profileImage': '/assets/img/defaultUserImage.png'
     };
     //Inicializa el directorio público del back para que sea usado por la plantilla en las imágenes
     this.publicDirBack = environment.publicDirBack;
@@ -41,7 +43,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //Recupera el nombre de usuario0
+    //Recupera el nombre de usuario de la url
     this.route.params.subscribe(event => {
       this.username = event.username;
      });
@@ -55,14 +57,18 @@ export class ProfileComponent implements OnInit {
      this.profileService.getUserData(this.username).subscribe(
        (response: any) => {
         this.userData = response.message.userData;
+        //Establece correctamente la url de la imagen de perfil si la hay. Si no, establece la imagen por defecto
+        if (this.userData.profileImage != null) {
+          this.userData.profileImage = environment.publicDirBack + 'profileImage/' + this.userData.profileImage;
+        } else {
+          this.userData.profileImage = '/assets/img/defaultUserImage.png';
+        }
         console.log(this.userData);
        },
        (error: any) => {
          console.log(error);
        }
      );
-
-     console.log('ES LOGGED USER: ' + this.isLoggedUser);
   }
 
   //Seguir al usuario

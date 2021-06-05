@@ -1,13 +1,15 @@
 <app-navbar></app-navbar>
-<div class="row mt-2 mx-0">
+<div class="row mt-4 mx-0">
     <div class="col-12 col-md-6 col-lg-4 form-group mx-auto p-2 border rounded">
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <input type="text" class="form-control" id="username" formControlName="username" placeholder="Nombre de usuario" />
             <input type="text" class="form-control mt-2" id="name" formControlName="name" placeholder="Tu nombre" />
             <input type="email" class="form-control mt-2" id="email" formControlName="email" placeholder="Correo electrónico" />
             <input type="password" class="form-control mt-2" id="password" formControlName="password" minlength="8" placeholder="Contraseña" />
+            <input type="password" class="form-control mt-2" placeholder="Repite la contraseña" />
             <button class="btn btn-dark mt-2 mx-auto w-100">Registrarme</button>
             <p class="mt-2 text-center">¿Ya tienes cuenta? <a href="/login">Iniciar sesión</a></p>
         </form>
     </div>
 </div>
+<app-footer class="fixed-bottom"></app-footer>

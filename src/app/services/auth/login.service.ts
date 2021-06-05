@@ -50,7 +50,7 @@ export class LoginService {
       email: "",
       rol: "",
       balance: 0,
-      profileImage: ""
+      profileImage: "/assets/img/defaultUserImage.png"
     };
     if (this.isUserSignedIn()) {
       user = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);
@@ -58,6 +58,29 @@ export class LoginService {
     }
     //console.log(user);
     return user;
+  }
+
+  //Updates profileImage
+  public updateProfile(profileImage: string, name: string, email: string, about: string) {
+    let user: any | null = {
+      about: "",
+      access_token: "",
+      username: "",
+      name: "",
+      email: "",
+      rol: "",
+      balance: 0,
+      profileImage: "/assets/img/defaultUserImage.png"
+    };
+    if (this.isUserSignedIn()) {
+      user = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);
+      user = JSON.parse(user);
+      user.profileImage = profileImage;
+      user.name = name;
+      user.email = email;
+      user.about = about;
+      this.saveUser(user);
+    }
   }
 
   //Deletes Access Token from session

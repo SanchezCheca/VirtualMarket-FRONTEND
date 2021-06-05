@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div *ngIf="userData.username == ''" class="row py-5 px-4 mx-0">
     <div class="col-12 text-center">
-        <i>El usuario no exsite</i>
+        <i>El usuario no existe</i>
     </div>
 </div>
 <div *ngIf="userData.username != ''" class="row py-5 px-4 mx-0">
@@ -12,7 +12,7 @@
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head">
                     <div class="profile mr-3">
-                        <img src="{{profileImage}}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                        <img src="{{userData.profileImage}}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
                         <a *ngIf="isLoggedUser" href="/editProfile" class="btn btn-outline-dark btn-sm btn-block"><i class="fa fa-edit"></i> Editar perfil</a>
                         <div *ngIf="logged && !isLoggedUser">
                             <button class="btn btn-outline-dark btn-sm btn-block" *ngIf="!userData.isFollowing" (click)="follow()">Seguir</button>
@@ -41,7 +41,7 @@
             <div class="px-4 py-3">
                 <h5 class="mb-0">Sobre mí</h5>
                 <div class="p-4 rounded shadow-sm bg-light">
-                    <p class="font-italic mb-0">Me gusta hacer dinero</p>
+                    <p class="font-italic mb-0 formateado">{{userData.about}}</p>
                 </div>
             </div>
             <div class="py-4 px-4">

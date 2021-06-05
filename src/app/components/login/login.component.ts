@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/auth/login.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -78,6 +79,13 @@ export class LoginComponent implements OnInit {
         this.user.rol = response.message.user.rol;
         this.user.balance = response.message.user.balance;
         this.user.profileImage = response.message.user.profileImage;
+        this.user.about = response.message.user.about;
+
+        //Formatea correctamente la url del perfil si existe
+        if (this.user.profileImage != null) {
+          //this.user.profileImage = environment.publicDirBack + 'profileImage/' + this.user.profileImage;
+        }
+
         console.log(this.user);
 
         //Save user in session
