@@ -38,4 +38,12 @@ export class SearchService {
     return respuesta;
   }
 
+  /**
+   * Devuelve los resultados de una búsqueda
+   * @param search
+   */
+  public search(search: string) {
+
+  }
+
 }
