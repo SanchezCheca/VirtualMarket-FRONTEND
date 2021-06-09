@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/auth/login.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,11 @@ export class NavbarComponent implements OnInit {
   constructor(private loginService: LoginService) {
     this.logged = false;
     this.user = loginService.getUser();
+    if (this.user.profileImage == null) {
+      this.user.profileImage = '/assets/img/defaultUserImage.png';
+    } else {
+      this.user.profileImage = environment.publicDirBack + 'profileImage/' + this.user.profileImage;
+    }
   }
 
   ngOnInit(): void {

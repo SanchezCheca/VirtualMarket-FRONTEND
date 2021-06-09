@@ -15,6 +15,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { SearchComponent } from './components/search/search.component';
+import { FiltersComponent } from './components/filters/filters.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { ImageProductComponent } from './components/image-product/image-product.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     ProfileComponent,
     FooterComponent,
     UploadComponent,
+    EditProfileComponent,
+    SearchComponent,
+    FiltersComponent,
+    SearchResultComponent,
+    ImageProductComponent,
   ],
   imports: [
     BrowserModule,

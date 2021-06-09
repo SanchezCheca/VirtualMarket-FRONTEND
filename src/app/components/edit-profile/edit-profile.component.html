@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<div class="row py-5 px-4 mx-0">
+    <!--EL USUARIO SE HA ENCONTRADO-->
+    <div class="col-12 col-sm-10 col-lg-8 mx-auto">
+        <!-- PERFIL -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+                <div class="px-4 pt-0 pb-4 cover">
+                    <div class="media align-items-end profile-head">
+                        <div class="mr-3 mb-1">
+                            <img src="{{profileImage}}" alt="..." class="rounded mb-2 img-thumbnail profileImage">
+                        </div>
+                        <div class="media-body mb-5 text-white">
+                            <input type="text" class="form-control mt-0 mb-0 textInput" id="name" formControlName="name" placeholder="Tu nombre" />
+                            <p class="small mb-4"><i class="fas fa-user mr-1"></i> {{user.username}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--INFORMACIÓN PRIVADA-->
+                <div class="px-4 py-3 mt-5">
+                    <input type="file" class="file-upload mb-3" id="image" formControlName="image" id="image" (change)="saveImage($event)" />
+                    <button type="submit" class="btn btn-success float-right">Guardar cambios</button>
+                    <a class="btn btn-danger float-right mr-2" href="/user/{{user.username}}">Cancelar</a>
+                    <h5 class="mb-2">Mis datos</h5>
+                    <p class="d-inline">Correo electrónico: </p>
+                    <input type="text" class="form-control mt-0 mb-0 w-25 d-inline textInput" id="email" formControlName="email" placeholder="ejemplo@ejemplo.com" />
+                </div>
+                <!--SOBRE MI-->
+                <div class="px-4 py-3">
+                    <h5 class="mb-0">Sobre mí</h5>
+                    <div class="p-4 rounded shadow-sm bg-light mt-2">
+                        <textarea id="about" formControlName="about" rows="3" cols="100"></textarea>
+                    </div>
+                </div>
+                <!--ENLACES
+                <div class="px-4 py-3">
+                    <h5 class="mb-0">Enlaces</h5>
+                    <div class="p-4 rounded shadow-sm bg-light mt-2">
+                        <p class="font-italic mb-0">Me gusta hacer dinero</p>
+                    </div>
+                </div>-->
+            </form>
+            <!--Apartado cambiar contraseña-->
+            <div class="p-5">
+                <h5 class="mb-0">Cambiar contraseña</h5>
+                <form [formGroup]="resetPasswordForm" (ngSubmit)="onSubmitPassword()" class="w-50">
+                    <input type="password" class="form-control mt-2" id="currentPassword" formControlName="currentPassword" minlength="8" placeholder="Contraseña actual" />
+                    <input type="password" class="form-control mt-2" id="newPassword" formControlName="newPassword" minlength="8" placeholder="Nueva contraseña" />
+                    <input type="password" class="form-control mt-2" id="newPassword2" formControlName="newPassword2" minlength="8" placeholder="Repite la nueva contraseña" />
+                    <button type="submit" class="btn btn-dark mt-2">Cambiar contraseña</button>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

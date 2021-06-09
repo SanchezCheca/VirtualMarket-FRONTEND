@@ -12,6 +12,8 @@ import { UploadService } from 'src/app/services/upload.service';
 })
 export class UploadComponent implements OnInit {
 
+  imageSrc: any;
+
   uploadForm: FormGroup;
   image: any;
   submitted = false;
@@ -36,6 +38,7 @@ export class UploadComponent implements OnInit {
     this.imageData = {
       'category': 1
     };
+    this.imageSrc = '';
   }
 
   get form() { return this.uploadForm.controls; }
@@ -71,6 +74,11 @@ export class UploadComponent implements OnInit {
    */
   saveImage(event: any) {
     this.image = <File>event.target.files[0];
+
+    const reader = new FileReader();
+    reader.onload = e => this.imageSrc = reader.result;
+
+    reader.readAsDataURL(this.image);
   }
 
   /**

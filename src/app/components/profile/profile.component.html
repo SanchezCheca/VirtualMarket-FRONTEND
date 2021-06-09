@@ -1,6 +1,108 @@
 <app-navbar></app-navbar>
-<div class="row mt-2 w-100">
-    <p>¡Esto es un perfil!
-    </p>
+<div *ngIf="userData.username == ''" class="row py-5 px-4 mx-0">
+    <!--NO SE ENCUENTRA EL USUARIO-->
+    <div class="col-12 text-center">
+        <i>El usuario no existe</i>
+    </div>
 </div>
-Nombre de usuario: {{username}}
+<div *ngIf="viendoImagenes" class="row py-5 px-4 mx-0">
+    <!--VISTA "VER TODAS LAS IMÁGENES"-->
+    <div class="col-12 col-sm-10 col-lg-8 mx-auto">
+        <div class="bg-white shadow rounded overflow-hidden p-4">
+            <!--PARTE SUPERIOR-->
+            <a class="btn float-right btn-dark mt-4 mr-4" href="/user/{{userData.username}}"><i class="fas fa-arrow-left"></i></a>
+            <div class="media align-items-end">
+                <img src="{{userData.profileImage}}" alt="..." width="130" class="rounded mb-2 img-thumbnail d-inline align-self-center">
+                <div class="media-body ml-4">
+                    <h4 class="mt-0 mb-0">{{userData.name}}</h4>
+                    <p class="small mb-4"><i class="fas fa-user mr-1"></i> {{userData.username}}</p>
+                </div>
+            </div>
+            <!--Imágnes del usuario-->
+            <div *ngIf="userData.userImages.length < 1">
+                <p>El usuario no tiene imágenes.</p>
+            </div>
+            <div *ngIf="userData.userImages.length > 0" class="row">
+                <h4 class="mb-4 col-12">
+                    <hr>{{userData.nImages}} Imágenes</h4>
+                <div class="grid-gallery w-100">
+                    <a class="grid-gallery__item imageHolder" href="#" *ngFor="let image of userData.userImages">
+                        <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
+                        <span class="caption">
+                          <p>{{image.price}}€</p>
+                        </span>
+                    </a>
+                </div>
+
+                <!--
+                <div *ngFor="let image of userData.userImages" class="col-lg-4 mb-2 mx-auto text-center">
+                    <img src="{{publicDirBack}}thumbnail/{{image.filename}}" alt="" class="img-fluid rounded imagenMuestra">
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!viendoImagenes && userData.username != ''" class="row py-5 px-4 mx-0">
+    <!--EL USUARIO SE HA ENCONTRADO, PERFIL NORMAL-->
+    <div class="col-12 col-sm-10 col-lg-8 mx-auto">
+        <!-- PERFIL -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3">
+                        <img src="{{userData.profileImage}}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                        <a *ngIf="isLoggedUser" href="/editProfile" class="btn btn-outline-dark btn-sm btn-block"><i class="fa fa-edit"></i> Editar perfil</a>
+                        <div *ngIf="logged && !isLoggedUser">
+                            <button class="btn btn-outline-dark btn-sm btn-block" *ngIf="!userData.isFollowing" (click)="follow()">Seguir</button>
+                            <button class="btn btn-dark btn-sm btn-block" *ngIf="userData.isFollowing" (mouseover)="siguiendoIN()" (mouseout)="siguiendoOUT()" (click)="unfollow()">{{textoSiguiendo}}</button>
+                        </div>
+                    </div>
+                    <div class="media-body mb-5 text-white">
+                        <h4 class="mt-0 mb-0">{{userData.name}}</h4>
+                        <p class="small mb-4"><i class="fas fa-user mr-1"></i> {{userData.username}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li *ngIf="isLoggedUser" class="list-inline-item mr-5">
+                        <h5 class="font-weight-bold mb-0 d-block">{{loggedUser.balance}}</h5><small class="text-muted"><i class="fas fa-wallet"></i> Balance</small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">{{userData.nImages}}</h5><small class="text-muted" *ngIf="userData.nImages == 1"> <i class="fas fa-image mr-1"></i>Imagen</small><small class="text-muted" *ngIf="userData.nImages != 1"> <i class="fas fa-image mr-1"></i>Imágenes</small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">{{userData.nFollowers}}</h5><small *ngIf="userData.nFollowers != 1" class="text-muted"> <i class="fas fa-user mr-1"></i>Seguidores</small><small *ngIf="userData.nFollowers == 1" class="text-muted"> <i class="fas fa-user mr-1"></i>Seguidor</small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">{{userData.nFollowing}}</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Siguiendo</small>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="userData.about" class="px-4 py-3">
+                <h5 class="mb-0">Sobre mí</h5>
+                <div class="p-4 rounded shadow-sm bg-light">
+                    <p class="font-italic mb-0 formateado">{{userData.about}}</p>
+                </div>
+            </div>
+            <div class="py-4 px-4">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0">Últimas imágenes</h5><a *ngIf="userData.userImages.length != 0" href="/user/{{username}}/images" class="btn btn-link text-muted">Mostrar todo ({{userData.nImages}})</a>
+                </div>
+                <div class="row">
+                    <div *ngIf="userData.userImages.length == 0" class="col-12 text-center"><i>No hay ninguna imagen.</i></div>
+                    <!--  <div *ngFor="let image of userData.userImages; let i=index" class="col-lg-4 mb-2 mx-auto text-center"><img *ngIf="i<3" src="{{publicDirBack}}thumbnail/{{image.filename}}" alt="" class="img-fluid imagenMuestra"></div> -->
+                    <div *ngIf="userData.userImages.length > 0" class="grid-gallery w-100">
+                        <a class="grid-gallery__item imageHolder" href="#" *ngFor="let image of userData.userImages.slice(0,8)">
+                            <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
+                            <span class="caption">
+                            <p>{{image.price}}€</p>
+                          </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
