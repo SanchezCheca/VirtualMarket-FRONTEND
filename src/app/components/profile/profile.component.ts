@@ -12,6 +12,9 @@ import { environment } from 'src/environments/environment';
 })
 export class ProfileComponent implements OnInit {
 
+  loggedUser: any;
+
+  viendoImagenes: boolean;  //Indica si se están viendo sólo las imágenes del usuario
   textoSiguiendo: any;  //Texto "Siguiendo" o "dejar de seguir" cuando se pasa el mouse por encima
   logged: any;  //Si el usuario ha iniciado sesión
   username: any;  //Nombre de usuario del perfil que se está mirando
@@ -21,6 +24,9 @@ export class ProfileComponent implements OnInit {
   publicDirBack: any; //Directorio al back para ser usado por la plantilla html
 
   constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private loginService: LoginService, private profileService: ProfileService) {
+    this.viendoImagenes = router.url.endsWith('/images');
+    this.loggedUser = loginService.getUser();
+
     this.textoSiguiendo = 'Siguiendo';
     this.logged = this.loginService.isUserSignedIn();
     this.isLoggedUser = false;

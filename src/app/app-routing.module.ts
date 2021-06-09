@@ -16,7 +16,12 @@ const routes: Routes = [
   {path: 'search/perro', component: SearchResultComponent},
   {path: 'editProfile', component: EditProfileComponent},
   {path: 'upload', component: UploadComponent},
-  {path: 'user/:username', component: ProfileComponent},
+  {path: 'user/:username', component: ProfileComponent, children: [
+    {
+      path: 'images', component: ProfileComponent
+    }
+  ]},
+  //{path: 'user/:username/images', component: UserImagesComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: RegisterComponent},
   {path: 'inicio', component: IndexComponent},
