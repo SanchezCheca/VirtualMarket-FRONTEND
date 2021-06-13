@@ -34,7 +34,20 @@ export class SearchService {
       'Access-Control-Allow-Origin': '*'
     });
     let respuesta = this.http.get(url, { headers: headers });
-    //console.log(respuesta);
+    return respuesta;
+  }
+
+  /**
+   * Devuelve los resultados de una búsqueda
+   * @param searchTerm
+   */
+  public search(searchTerm: string) {
+    const url = environment.dirBack + "search/" + searchTerm;
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+    let respuesta = this.http.get(url, { headers: headers });
     return respuesta;
   }
 

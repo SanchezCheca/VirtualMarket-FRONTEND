@@ -1,25 +1,107 @@
-<app-navbar></app-navbar>
-<div class="row bg-dark p-2 mx-0">
+<div class="container-fluid m-0 p-0 w-100 contenedorPrincipal">
+  <app-navbar></app-navbar>
+  <div class="row bg-dark p-2 mx-0">
     <div class="col-12">
-        <app-search></app-search>
+      <app-search></app-search>
     </div>
-</div>
+  </div>
 
-<app-filters></app-filters>
+  <!--FILTROS-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<div class="row my-3 px-3 mx-0">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <form>
+            <select class="nav-link dropdown-toggle" name="category" id="category" placeholder="Categoría">
+              <option value="1" hidden selected>Categoría</option>
+              <option *ngFor="let category of categories" value="{{category.id}}" class="dropdown-item">{{category.name}}
+              </option>
+            </select>
+          </form>
+        </li>
+
+        <!--
+  <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Categoría
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <button class="dropdown-item" *ngFor="let category of categories">{{category.name}}</button>
+            <a *ngFor="let category of categories" class="dropdown-item">{{category.name}}</a>
+          </div>
+        </li>
+        -->
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Precio
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Tamaño
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Orientación
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+  </nav>
+
+  <!--RESULTADOS DE LA BÚSQUEDA-->
+
+  <div class="row my-3 px-3 mx-0">
     <div class="col-12">
-        <h4 class="h4">Resultados de la búsqueda: perro</h4>
+      <h4 class="h4">Resultados de la búsqueda: {{searchTerm}}</h4>
+    </div>
+    <div *ngIf="this.images.length == 0" class="col-12 text-center">
+      <p>No hay resultados</p>
     </div>
     <div class="col-12">
-        <div class="grid-gallery w-100">
-            <a class="grid-gallery__item imageHolder" href="#" *ngFor="let image of images">
-                <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
-                <span class="caption">
-                  <p>{{image.price}}€</p>
-                </span>
-            </a>
-        </div>
+      <div class="grid-gallery w-100">
+        <a class="grid-gallery__item imageHolder" href="#" *ngFor="let image of images">
+          <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
+          <span class="caption">
+            <p>{{image.price}}€</p>
+          </span>
+        </a>
+      </div>
     </div>
+  </div>
+  <app-footer></app-footer>
+
 </div>
-<app-footer class="fixed-bottom"></app-footer>
