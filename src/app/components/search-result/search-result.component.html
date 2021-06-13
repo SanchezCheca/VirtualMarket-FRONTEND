@@ -7,91 +7,52 @@
   </div>
 
   <!--FILTROS-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="navbar navbar-light bg-light">
+    <form class="form-inline" [formGroup]="filtersForm" (ngSubmit)="applyFilters()">
+      <select class="form-control custom-select mx-1" name="price" id="price" placeholder="Precio"
+        formControlName="price" [(ngModel)]="filters.price">
+        <option value="1" hidden selected>Precio</option>
+        <option value="leq1">
+          <= 1€</option>
+        <option value="leq10">
+          <= 10€</option>
+        <option value="g10">> 10€</option>
+      </select>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <form>
-            <select class="nav-link dropdown-toggle" name="category" id="category" placeholder="Categoría">
-              <option value="1" hidden selected>Categoría</option>
-              <option *ngFor="let category of categories" value="{{category.id}}" class="dropdown-item">{{category.name}}
-              </option>
-            </select>
-          </form>
-        </li>
+      <select class="form-control custom-select mx-1" name="size" id="size" placeholder="Tamaño" formControlName="size"
+        [(ngModel)]="filters.size">
+        <option value="1" hidden selected>Tamaño</option>
+        <option value="small">Pequeñas</option>
+        <option value="medium">Medianas</option>
+        <option value="large">Grandes</option>
+      </select>
 
-        <!--
-  <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Categoría
-          </a>
+      <select class="form-control custom-select mx-1" name="facing" id="facing" placeholder="Orientación"
+        formControlName="facing" [(ngModel)]="filters.facing">
+        <option value="1" hidden selected>Orientación</option>
+        <option value="horizontal">Horizontal</option>
+        <option value="vertical">Vertical</option>
+      </select>
 
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-            <button class="dropdown-item" *ngFor="let category of categories">{{category.name}}</button>
-            <a *ngFor="let category of categories" class="dropdown-item">{{category.name}}</a>
-          </div>
-        </li>
-        -->
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Precio
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Tamaño
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Orientación
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-
-      </ul>
-
-    </div>
-  </nav>
+      <button type="submit" class="btn btn-dark mx-2">Aplicar</button>
+      <button type="reset" class="btn btn-outline-dark mx-2" (click)="resetFilters()">Resetear</button>
+    </form>
+  </div>
 
   <!--RESULTADOS DE LA BÚSQUEDA-->
-
   <div class="row my-3 px-3 mx-0">
     <div class="col-12">
-      <h4 class="h4">Resultados de la búsqueda: {{searchTerm}}</h4>
+      <h4 *ngIf="searchTerm" class="h4">Resultados de la búsqueda: {{searchTerm}}</h4>
+      <h4 *ngIf="mostrandoUltimas">Últimas imágenes</h4>
+
+      <h5 *ngIf="this.images.length == 1" class="h5">{{this.images.length}} resultado</h5>
+      <h5 *ngIf="this.images.length > 1" class="h5">{{this.images.length}} resultados</h5>
     </div>
     <div *ngIf="this.images.length == 0" class="col-12 text-center">
       <p>No hay resultados</p>
     </div>
     <div class="col-12">
+      <!--Sin filtros?-->
       <div class="grid-gallery w-100">
         <a class="grid-gallery__item imageHolder" href="#" *ngFor="let image of images">
           <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
