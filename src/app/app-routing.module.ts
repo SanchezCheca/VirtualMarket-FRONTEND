@@ -13,7 +13,8 @@ import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
   {path: 'image/JI4crXIgx94O6MDJ5Rg1DsV2Lmpsnm8DR3TfSRfL.jpg', component: ImageProductComponent},
-  {path: 'search/perro', component: SearchResultComponent},
+  {path: 'search/:searchTerm', component: SearchResultComponent},
+  {path: 'search', component: SearchResultComponent},
   {path: 'editProfile', component: EditProfileComponent},
   {path: 'upload', component: UploadComponent},
   {path: 'user/:username', component: ProfileComponent, children: [
@@ -21,7 +22,6 @@ const routes: Routes = [
       path: 'images', component: ProfileComponent
     }
   ]},
-  //{path: 'user/:username/images', component: UserImagesComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: RegisterComponent},
   {path: 'inicio', component: IndexComponent},
