@@ -26,7 +26,7 @@ export class IndexComponent implements OnInit {
     this.searchService.getLastImages().subscribe(
       (response: any) => {
         this.images = response.message;
-        //this.imageRoutes = environment.publicDirBack + 'thumbnail/' + this.images;
+        this.images.splice(30,this.images.length - 30);
         console.log(this.images);
       },
       (error: any) => {

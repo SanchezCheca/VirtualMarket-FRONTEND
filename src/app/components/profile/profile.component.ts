@@ -12,6 +12,13 @@ import { environment } from 'src/environments/environment';
 })
 export class ProfileComponent implements OnInit {
 
+  paginationGuide: any[] = [];  //Array vacío auxiliar para la paginación en el html
+  currentPage: any;
+  totalPages: any;
+  imagesPerPage = 16;   //Valor constante de cara a poder modificarlo o hacerlo dinámico en un futuro
+  mostrandoUltimas: boolean = false;  //Define si se están mostrando las últimas imágenes
+  paginatedImages: any[] = [];
+
   loggedUser: any;
 
   viendoImagenes: boolean;  //Indica si se están viendo sólo las imágenes del usuario
@@ -63,6 +70,7 @@ export class ProfileComponent implements OnInit {
      this.profileService.getUserData(this.username).subscribe(
        (response: any) => {
         this.userData = response.message.userData;
+        this.paginate();
         //Establece correctamente la url de la imagen de perfil si la hay. Si no, establece la imagen por defecto
         if (this.userData.profileImage != null) {
           this.userData.profileImage = environment.publicDirBack + 'profileImage/' + this.userData.profileImage;
@@ -114,5 +122,24 @@ export class ProfileComponent implements OnInit {
   siguiendoOUT() {
     this.textoSiguiendo = 'Siguiendo';
   }
+
+  //--------PAGINACIÓN (vista imágenes)
+    //Devuelve a la página 1 y divide las imágenes
+    paginate() {
+      this.totalPages = Math.ceil(this.userData.userImages.length / this.imagesPerPage);
+      this.paginationGuide = new Array(this.totalPages);
+      this.currentPage = 1;
+      //this.currentPage = this.route.snapshot.queryParamMap.get("p");
+      this.paginatedImages = [...this.userData.userImages];
+      this.paginatedImages.splice(this.imagesPerPage,(this.userData.userImages.length-this.imagesPerPage));
+    }
+
+    //Cambia a otra página
+    toPage(page: any) {
+      this.currentPage = page;
+      this.paginatedImages = [...this.userData.userImages];
+      this.paginatedImages.splice(0, (this.imagesPerPage * (this.currentPage - 1)));  //Elimina los elementos desde el 0 hasta el primero de la nueva página sin incluir
+      this.paginatedImages.splice(this.imagesPerPage, (this.paginatedImages.length - this.imagesPerPage));  //Elimina los elementos que se encuentran más allá de la página actual
+    }
 
 }

@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from 'src/app/services/search.service';
+import { LoginService } from 'src/app/services/auth/login.service';
 
 @Component({
   selector: 'app-image-product',
@@ -15,7 +16,11 @@ export class ImageProductComponent implements OnInit {
   image: any;
   publicDirBack: any;
 
-  constructor(private route: ActivatedRoute, private router: Router, private location: Location, private searchService: SearchService) {
+  isOwner: boolean; //Define si el usuario que está viendo la imagen es su propietario
+
+  constructor(private loginService: LoginService, private route: ActivatedRoute, private router: Router, private location: Location, private searchService: SearchService) {
+    this.isOwner = false;
+
     this.publicDirBack = environment.publicDirBack;
 
     this.image = {
@@ -45,7 +50,7 @@ export class ImageProductComponent implements OnInit {
     this.searchService.getImageInfo(this.imageFilename).subscribe(
       (response: any) => {
         this.image = response.message;
-        console.log(response);
+        this.isOwner = this.loginService.getUser().username.toLowerCase() == this.image.creatorUsername.toLowerCase();
       },
       (error: any) => {
         console.log(error);
