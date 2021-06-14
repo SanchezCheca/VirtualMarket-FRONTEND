@@ -26,7 +26,7 @@
                 <h4 class="mb-4 col-12">
                     <hr>{{userData.nImages}} Imágenes</h4>
                 <div class="grid-gallery w-100">
-                    <a class="grid-gallery__item imageHolder" href="#" *ngFor="let image of userData.userImages">
+                    <a class="grid-gallery__item imageHolder" href="/image/{{image.filename}}" *ngFor="let image of userData.userImages">
                         <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
                         <span class="caption">
                           <p>{{image.price}}€</p>
@@ -88,7 +88,7 @@
                     <div *ngIf="userData.userImages.length == 0" class="col-12 text-center"><i>No hay ninguna imagen.</i></div>
                     <!--  <div *ngFor="let image of userData.userImages; let i=index" class="col-lg-4 mb-2 mx-auto text-center"><img *ngIf="i<3" src="{{publicDirBack}}thumbnail/{{image.filename}}" alt="" class="img-fluid imagenMuestra"></div> -->
                     <div *ngIf="userData.userImages.length > 0" class="grid-gallery w-100">
-                        <a class="grid-gallery__item imageHolder" href="#" *ngFor="let image of userData.userImages.slice(0,8)">
+                        <a class="grid-gallery__item imageHolder" href="/image/{{image.filename}}" *ngFor="let image of userData.userImages.slice(0,8)">
                             <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
                             <span class="caption">
                             <p>{{image.price}}€</p>

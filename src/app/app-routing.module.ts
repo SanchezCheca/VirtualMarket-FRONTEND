@@ -12,7 +12,7 @@ import { SearchResultComponent } from './components/search-result/search-result.
 import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
-  {path: 'image/JI4crXIgx94O6MDJ5Rg1DsV2Lmpsnm8DR3TfSRfL.jpg', component: ImageProductComponent},
+  {path: 'image/:filename', component: ImageProductComponent},
   {path: 'search/:searchTerm', component: SearchResultComponent},
   {path: 'search', component: SearchResultComponent},
   {path: 'editProfile', component: EditProfileComponent},

@@ -51,4 +51,18 @@ export class SearchService {
     return respuesta;
   }
 
+  /**
+   * Recupera la información necesaria de una imagen para su venta
+   * @param filename
+   */
+  public getImageInfo(filename: string) {
+    const url = environment.dirBack + "getImage/" + filename;
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+    let respuesta = this.http.get(url, { headers: headers });
+    return respuesta;
+  }
+
 }
