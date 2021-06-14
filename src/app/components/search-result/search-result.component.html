@@ -7,7 +7,7 @@
   </div>
 
   <!--FILTROS-->
-  <div class="navbar navbar-light bg-light">
+  <div *ngIf="this.images.length > 0" class="navbar navbar-light bg-light">
     <form class="form-inline" [formGroup]="filtersForm" (ngSubmit)="applyFilters()">
       <select class="form-control custom-select mx-1" name="price" id="price" placeholder="Precio"
         formControlName="price" [(ngModel)]="filters.price">
@@ -54,13 +54,23 @@
     <div class="col-12">
       <!--Sin filtros?-->
       <div class="grid-gallery w-100">
-        <a class="grid-gallery__item imageHolder" href="#" *ngFor="let image of images">
+        <a class="grid-gallery__item imageHolder" href="/image/{{image.filename}}" *ngFor="let image of paginatedImages">
           <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
           <span class="caption">
             <p>{{image.price}}€</p>
           </span>
         </a>
       </div>
+    </div>
+  </div>
+
+  <!--PAGINACIÓN-->
+  <div *ngIf="this.images.length > 0" class="row my-3 mx-0">
+    <div class="col-12 text-center">
+      <button *ngIf="totalPages > 1" class="btn btn-success mx-1" [disabled]="currentPage == 1" (click)="toPage(currentPage-1)">Anterior</button>
+      <button *ngFor="let cuenta of paginationGuide; let i = index" [attr.data-index]="i" (click)="toPage(i+1)" class="btn btn-success mx-1" [disabled]="currentPage == (i+1)">{{i+1}}</button>
+      <button *ngIf="totalPages > 1" class="btn btn-success mx-1" [disabled]="currentPage == paginationGuide.length" (click)="toPage(currentPage+1)">Siguiente</button>
+      <p class="mt-1 font-italic">Mostrando imágenes {{30 * (currentPage - 1) + 1}}-{{30 * (currentPage - 1) + paginatedImages.length}} de {{images.length}}</p>
     </div>
   </div>
   <app-footer></app-footer>

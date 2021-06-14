@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { environment } from 'src/environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-image-product',
@@ -8,9 +11,46 @@ import { Location } from '@angular/common';
 })
 export class ImageProductComponent implements OnInit {
 
-  constructor(private location: Location) { }
+  imageFilename: any;
+  image: any;
+  publicDirBack: any;
+
+  constructor(private route: ActivatedRoute, private router: Router, private location: Location, private searchService: SearchService) {
+    this.publicDirBack = environment.publicDirBack;
+
+    this.image = {
+      'filename': '',
+      'creatorName': '',
+      'creatorUsername': '',
+      'categoryName': '',
+      'price': '',
+      'format': '',
+      'width': '',
+      'height': ''
+    }
+
+  }
 
   ngOnInit(): void {
+    //Recupera el término de búsqueda de usuario de la url y lo busca cada vez que cambia la url
+    this.route.params.subscribe(event => {
+      console.log('FILENAME: ' + event.filename);
+      this.imageFilename = event.filename;
+      if (!this.imageFilename) {
+        //No hay nada en la url, 404
+        this.router.navigate(['/']);
+      }
+    });
+
+    this.searchService.getImageInfo(this.imageFilename).subscribe(
+      (response: any) => {
+        this.image = response.message;
+        console.log(response);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   atras() {

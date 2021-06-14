@@ -11,6 +11,12 @@ import { environment } from 'src/environments/environment';
 })
 export class SearchResultComponent implements OnInit {
 
+  paginationGuide: any[] = [];
+
+  ejemplo = false;
+  currentPage: any;
+  totalPages: any;
+
   mostrandoUltimas: boolean = false;  //Define si se están mostrando las últimas imágenes
 
   filtersForm: FormGroup;
@@ -18,11 +24,16 @@ export class SearchResultComponent implements OnInit {
 
   originalSearchResult: any[] = [];
   images: any[] = [];
+  paginatedImages: any[] = [];
   categories: any[] = [];
+
   publicDirBack = '';
   searchTerm: any;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private searchService: SearchService) {
+    this.currentPage = 1;
+    this.totalPages = 0;
+
     this.filters = {
       'price': '1',
       'size': '1',
@@ -127,11 +138,16 @@ export class SearchResultComponent implements OnInit {
       }
     }
 
+    this.paginate();
   }
 
   //Vuelve a buscar para limpiar los filtros
   resetFilters() {
-    this.search(this.searchTerm);
+    if (this.searchTerm) {
+      this.search(this.searchTerm);
+    } else {
+      this.getLastImages();
+    }
   }
 
   //Recupera la lista de categorías
@@ -155,8 +171,7 @@ export class SearchResultComponent implements OnInit {
         //console.log(response);
         this.images = response.message;
         this.originalSearchResult = [...this.images];
-
-        console.log(this.images);
+        this.paginate();
       },
       (error: any) => {
         console.log(error);
@@ -171,11 +186,30 @@ export class SearchResultComponent implements OnInit {
     this.searchService.getLastImages().subscribe(
       (response: any) => {
         this.images = response.message;
+        this.originalSearchResult = [...this.images];
+        this.paginate();
       },
       (error: any) => {
         console.log(error);
       }
     );
+  }
+
+  //Devuelve a la página 1 y divide las imágenes
+  paginate() {
+    this.totalPages = Math.ceil(this.images.length / 30);
+    this.paginationGuide = new Array(this.totalPages);
+    this.currentPage = 1;
+    this.paginatedImages = [...this.images];
+    this.paginatedImages.splice(30,(this.images.length-30));
+  }
+
+  //Cambia a otra página
+  toPage(page: any) {
+    this.currentPage = page;
+    this.paginatedImages = [...this.images];
+    this.paginatedImages.splice(0, (30 * (this.currentPage - 1)));  //Elimina los elementos desde el 0 hasta el primero de la nueva página sin incluir
+    this.paginatedImages.splice(30, (this.paginatedImages.length - 30));  //Elimina los elementos que se encuentran más allá de la página actual
   }
 
 }
