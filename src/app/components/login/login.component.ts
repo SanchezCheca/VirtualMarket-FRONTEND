@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
       email: "",
       rol: "",
       profileImage: "",
+      purchasedImages: []
     }
 
     this.message = "";
@@ -80,6 +81,7 @@ export class LoginComponent implements OnInit {
         this.user.balance = response.message.user.balance;
         this.user.profileImage = response.message.user.profileImage;
         this.user.about = response.message.user.about;
+        this.user.purchasedImages = response.message.purchasedImages;
 
         //Formatea correctamente la url del perfil si existe
         if (this.user.profileImage != null) {

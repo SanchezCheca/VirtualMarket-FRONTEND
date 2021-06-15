@@ -85,7 +85,7 @@
         <ul class="list-inline mb-0">
           <li *ngIf="isLoggedUser" class="list-inline-item mr-5">
             <h5 class="mb-0 d-block">{{loggedUser.balance}}€</h5><small class="text-muted"><i class="fas fa-wallet"></i>
-              Balance</small>
+              Saldo</small>
           </li>
           <li class="list-inline-item">
             <h5 class="font-weight-bold mb-0 d-block">{{userData.nImages}}</h5><small class="text-muted"
@@ -123,7 +123,7 @@
               *ngFor="let image of userData.userImages.slice(0,8)">
               <img class="grid-gallery__image" src="{{publicDirBack}}thumbnail/{{image.filename}}">
               <span class="caption">
-                <p>{{image.price}}€</p>
+                <p class="rounded-right bg-green">{{image.price}}€</p>
               </span>
             </a>
           </div>
