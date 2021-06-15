@@ -3,9 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  dirBack: 'http://127.0.0.1:8000/api/',
-  publicDirBack: 'http://127.0.0.1:8000/',
-  //dirBack: 'http://http://46.183.114.96/api/',
+  //dirBack: 'http://127.0.0.1:8000/api/',
+  //publicDirBack: 'http://127.0.0.1:8000/',
+  dirBack: 'http://46.183.114.96/api/',
+  publicDirBack: 'http://46.183.114.96/',
   production: false
 };
 
