@@ -24,8 +24,9 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength]],
+      password2: ['']
     });
     this.message = "";
   }
@@ -37,7 +38,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if (this.registerForm.invalid) {
+    if (this.registerForm.invalid || !this.validarDistintasPass()) {
       return;
     }
     let userData = this.registerForm.value;
@@ -63,6 +64,10 @@ export class RegisterComponent implements OnInit {
   onReset() {
     this.submitted = false;
     this.registerForm.reset();
+  }
+
+  validarDistintasPass() {
+    return this.registerForm.get('password')?.value === this.registerForm.get('password2')?.value;
   }
 
 }
