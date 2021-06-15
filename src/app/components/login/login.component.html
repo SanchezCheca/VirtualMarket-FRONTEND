@@ -1,15 +1,21 @@
 <app-navbar></app-navbar>
 <div class="row mt-4 mx-0 h-100">
     <div class="col-12 col-md-6 col-lg-4 form-group mx-auto p-2 border rounded">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="w-75 rounded bg-danger text-center mx-auto p-1 my-1" *ngIf="message">{{message}}</div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <input type="text" class="form-control" id="emailorusername" formControlName="emailorusername" placeholder="Correo electrónico o nombre de usuario" />
-            <input type="password" class="form-control mt-2" id="password" formControlName="password" minlength="8" placeholder="Contraseña" />
+            <div class="error" *ngIf="submitted && form.emailorusername.errors">
+              <div class="w-75 rounded bg-danger text-center mx-auto p-1 my-1" *ngIf="form.emailorusername.errors.required">Este campo es obligatorio</div>
+            </div>
+            <input type="password" class="form-control mt-2" id="password" formControlName="password" placeholder="Contraseña" />
+            <div class="error" *ngIf="submitted && form.password.errors">
+              <div class="w-75 rounded bg-danger text-center mx-auto p-1 my-1" *ngIf="form.password.errors.required">Este campo es obligatorio</div>
+            </div>
             <button type="submit" class="btn btn-dark mt-2 mx-auto w-100">Confirmar</button>
             <p class="mt-2 text-center">¿No tienes cuenta? <a href="/signup">Crear cuenta</a>
                 <br>
                 <a href="/forgotpassword">He olvidado mi contraseña</a>
             </p>
-            {{message}}
         </form>
     </div>
 </div>

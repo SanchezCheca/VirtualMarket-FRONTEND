@@ -11,6 +11,11 @@ import { environment } from 'src/environments/environment';
 })
 export class EditProfileComponent implements OnInit {
 
+  messageP: any;
+  passSubmitted: boolean = false;
+  passIguales: boolean = false;
+  submitted: boolean = false;
+  message: string;
   image: any; //Recurso de imagen para subirla
   user: any;
   editProfileForm: FormGroup;
@@ -18,12 +23,14 @@ export class EditProfileComponent implements OnInit {
   profileImage: any;  //url de la imagen de perfil
 
   constructor(private profileService: ProfileService, private loginService: LoginService, private formBuilder: FormBuilder) {
+    this.messageP = "";
+    this.message = "";
     this.user = this.loginService.getUser();
     console.log(this.user);
     this.editProfileForm = this.formBuilder.group({
       username: [this.user.username],
       name: [this.user.name, [Validators.required]],
-      email: [this.user.email, [Validators.required]],
+      email: [this.user.email, [Validators.required, Validators.email]],
       image: [],
       about: [this.user.about]
     });
@@ -35,11 +42,14 @@ export class EditProfileComponent implements OnInit {
 
     this.resetPasswordForm = this.formBuilder.group({
       currentPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required, Validators.minLength]],
       newPassword2: ['']
     })
 
   }
+
+  get form() { return this.editProfileForm.controls; }
+  get formPass() { return this.resetPasswordForm.controls; }
 
   ngOnInit(): void {
 
@@ -50,6 +60,7 @@ export class EditProfileComponent implements OnInit {
    * @returns
    */
   onSubmit() {
+    this.submitted = true;
     if (this.editProfileForm.invalid) {
       return;
     }
@@ -62,6 +73,7 @@ export class EditProfileComponent implements OnInit {
 
     this.profileService.updateUser(username, name, email, about, this.image).subscribe(
       (response: any) => {
+        this.message = response.message.message;
         if (this.image != null) {
           this.loginService.updateProfile(response.message.profileImage, name, email, about);
         } else {
@@ -79,6 +91,8 @@ export class EditProfileComponent implements OnInit {
    * Botón 'cambiar contraseña'
    */
   onSubmitPassword() {
+    this.passSubmitted = true;
+    this.passIguales = this.validarDistintasPass();
     if (this.resetPasswordForm.invalid) {
       return;
     }
@@ -89,9 +103,11 @@ export class EditProfileComponent implements OnInit {
     this.profileService.resetPassword(currentPassword, newPassword).subscribe(
       (response: any) => {
         console.log(response);
+        this.messageP = response.message.message;
       },
       (error: any) => {
         console.log(error);
+        this.messageP = error.message.message;
       }
     );
 
@@ -108,6 +124,10 @@ export class EditProfileComponent implements OnInit {
     reader.onload = e => this.profileImage = reader.result;
 
     reader.readAsDataURL(this.image);
+  }
+
+  validarDistintasPass() {
+    return this.resetPasswordForm.get('password')?.value === this.resetPasswordForm.get('password2')?.value;
   }
 
 }
