@@ -21,6 +21,7 @@ import { FiltersComponent } from './components/filters/filters.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { ImageProductComponent } from './components/image-product/image-product.component';
 import { MyPurchasesComponent } from './components/my-purchases/my-purchases.component';
+import { CrudComponent } from './components/crud/crud.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MyPurchasesComponent } from './components/my-purchases/my-purchases.com
     SearchResultComponent,
     ImageProductComponent,
     MyPurchasesComponent,
+    CrudComponent,
   ],
   imports: [
     BrowserModule,

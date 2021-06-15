@@ -47,6 +47,8 @@
                         <a class="dropdown-item" href="/user/{{this.user.username}}"><i class="fas fa-user"></i> Mi perfil</a>
                         <a class="dropdown-item" href="/purchases"><i class="fas fa-shopping-cart"></i> Compras</a>
                         <a class="dropdown-item" href="/user/{{this.user.username}}/images"><i class="far fa-images"></i> Mis imágenes</a>
+                        <div *ngIf="this.user.rol == 1" class="dropdown-divider"></div>
+                        <a *ngIf="this.user.rol == 1" class="dropdown-item" href="/crud">Zona ADMIN</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" (click)="logout()" href="#"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
                     </div>

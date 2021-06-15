@@ -1,0 +1,82 @@
+<app-navbar></app-navbar>
+
+<div class="row py-5 px-4 mx-0" *ngIf="editando">
+  <div class="col-12 col-sm-10 mx-auto">
+    <div class="bg-white shadow rounded overflow-hidden p-4">
+
+        <form class="row" [formGroup]="crudForm" (ngSubmit)="onSubmit()">
+          <div class="col-2 text-center">
+            ID
+            <input type="number" class="form-control" id="id" formControlName="id" placeholder="id" readonly />
+          </div>
+          <div class="col-2 text-center">
+            Nombre
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Nombre" />
+          </div>
+          <div class="col-2 text-center">
+            Correo
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email" />
+          </div>
+          <div class="col-2 text-center">
+            Rol (1: admin)
+            <input type="text" class="form-control" id="rol" formControlName="rol" placeholder="Rol" />
+          </div>
+          <div class="col-2 text-center">
+            Balance
+            <input type="number" class="form-control" id="balance" formControlName="balance"
+              placeholder="Balance" />
+          </div>
+          <div class="col-2 text-center">
+            <button class="btn btn-info d-inline btn-small my-3">Guardar</button>
+
+          </div>
+
+        </form>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+<div class="row py-5 px-4 mx-0">
+  <div class="col-12 col-sm-10 mx-auto">
+    <div class="bg-white shadow rounded overflow-hidden p-4">
+      <div *ngIf="message" class="bg-success rounded p-2 text-center mx-auto">{{message}}</div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.rol}}</td>
+            <td>{{user.balance}}</td>
+            <td>
+              <button type="button" class="btn btn-primary" (click)="editar(user.id,user.name,user.email,user.rol,user.balance)">Editar</button>
+                <button type="button" class="ml-2 btn btn-danger" (click)="eliminar(user.id)">Eliminar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
