@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { CrudComponent } from './components/crud/crud.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ImageProductComponent } from './components/image-product/image-product.component';
 import { IndexComponent } from './components/index/index.component';
@@ -14,6 +15,7 @@ import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
   {path: 'image/:filename', component: ImageProductComponent},
+  {path: 'crud', component: CrudComponent},
   {path: 'purchases', component: MyPurchasesComponent},
   {path: 'search/:searchTerm', component: SearchResultComponent},
   {path: 'search', component: SearchResultComponent},
