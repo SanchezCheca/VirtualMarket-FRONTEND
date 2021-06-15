@@ -5,6 +5,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { ImageProductComponent } from './components/image-product/image-product.component';
 import { IndexComponent } from './components/index/index.component';
 import { LoginComponent } from './components/login/login.component';
+import { MyPurchasesComponent } from './components/my-purchases/my-purchases.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -13,6 +14,7 @@ import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
   {path: 'image/:filename', component: ImageProductComponent},
+  {path: 'purchases', component: MyPurchasesComponent},
   {path: 'search/:searchTerm', component: SearchResultComponent},
   {path: 'search', component: SearchResultComponent},
   {path: 'editProfile', component: EditProfileComponent},

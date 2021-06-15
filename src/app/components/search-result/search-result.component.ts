@@ -10,25 +10,26 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnInit {
+  ejemplo: any;
 
-  paginationGuide: any[] = [];
+  searchTerm: any;
 
-  ejemplo = false;
+  paginationGuide: any[] = [];  //Array vacío auxiliar para la paginación en el html
   currentPage: any;
   totalPages: any;
+  imagesPerPage = 30;   //Valor constante de cara a poder modificarlo o hacerlo dinámico en un futuro
 
   mostrandoUltimas: boolean = false;  //Define si se están mostrando las últimas imágenes
-
-  filtersForm: FormGroup;
-  filters: any;
 
   originalSearchResult: any[] = [];
   images: any[] = [];
   paginatedImages: any[] = [];
   categories: any[] = [];
 
+  filtersForm: FormGroup;
+  filters: any;
+
   publicDirBack = '';
-  searchTerm: any;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private searchService: SearchService) {
     this.currentPage = 1;
@@ -53,6 +54,7 @@ export class SearchResultComponent implements OnInit {
     //Recupera el término de búsqueda de usuario de la url y lo busca cada vez que cambia la url
     this.route.params.subscribe(event => {
       this.searchTerm = event.searchTerm;
+
       if (!this.searchTerm) {
         //No hay nada en la url, es el caso en que no se ha buscado nada: Se recuperan las últimas imágenes
         this.getLastImages();
@@ -197,19 +199,20 @@ export class SearchResultComponent implements OnInit {
 
   //Devuelve a la página 1 y divide las imágenes
   paginate() {
-    this.totalPages = Math.ceil(this.images.length / 30);
+    this.totalPages = Math.ceil(this.images.length / this.imagesPerPage);
     this.paginationGuide = new Array(this.totalPages);
     this.currentPage = 1;
+    //this.currentPage = this.route.snapshot.queryParamMap.get("p");
     this.paginatedImages = [...this.images];
-    this.paginatedImages.splice(30,(this.images.length-30));
+    this.paginatedImages.splice(this.imagesPerPage,(this.images.length-this.imagesPerPage));
   }
 
   //Cambia a otra página
   toPage(page: any) {
     this.currentPage = page;
     this.paginatedImages = [...this.images];
-    this.paginatedImages.splice(0, (30 * (this.currentPage - 1)));  //Elimina los elementos desde el 0 hasta el primero de la nueva página sin incluir
-    this.paginatedImages.splice(30, (this.paginatedImages.length - 30));  //Elimina los elementos que se encuentran más allá de la página actual
+    this.paginatedImages.splice(0, (this.imagesPerPage * (this.currentPage - 1)));  //Elimina los elementos desde el 0 hasta el primero de la nueva página sin incluir
+    this.paginatedImages.splice(this.imagesPerPage, (this.paginatedImages.length - this.imagesPerPage));  //Elimina los elementos que se encuentran más allá de la página actual
   }
 
 }

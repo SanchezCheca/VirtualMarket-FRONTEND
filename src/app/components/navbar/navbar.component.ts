@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   user: any;
   logged: boolean;
 
-  constructor(private loginService: LoginService) {
+  constructor(public loginService: LoginService) {
     this.logged = false;
     this.user = loginService.getUser();
     if (this.user.profileImage == null) {

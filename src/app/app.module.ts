@@ -20,6 +20,7 @@ import { SearchComponent } from './components/search/search.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { ImageProductComponent } from './components/image-product/image-product.component';
+import { MyPurchasesComponent } from './components/my-purchases/my-purchases.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ImageProductComponent } from './components/image-product/image-product.
     FiltersComponent,
     SearchResultComponent,
     ImageProductComponent,
+    MyPurchasesComponent,
   ],
   imports: [
     BrowserModule,

@@ -64,6 +64,8 @@ export class EditProfileComponent implements OnInit {
       (response: any) => {
         if (this.image != null) {
           this.loginService.updateProfile(response.message.profileImage, name, email, about);
+        } else {
+          this.loginService.updateProfile('', name, email, about);
         }
         console.log(response);
       },

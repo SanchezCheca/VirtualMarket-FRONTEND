@@ -1,15 +1,95 @@
 <app-navbar></app-navbar>
-<div class="d-flex justify-content-center container mt-5 mb-5">
-    <div class="card p-3 bg-white">
-        <h4 class="mx-auto">Comprar imagen</h4>
-        <div class="about-product text-center mt-2"><img src="{{publicDirBack}}sample/{{imageFilename}}" width="600">
-            <div class="mt-2">
-                <h5><i class="fas fa-user"></i> <a href="/user/{{image.creatorUsername}}">{{image.creatorUsername}}</a></h5>
-                <h6 class="mt-0 text-black-50">{{image.width}}x{{image.height}}<br>{{image.format}}<br>{{image.categoryName}}</h6>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center total font-weight-bold mt-4"><span>Precio: {{image.price}}€</span></div><button class="btn btn-success w-50 mx-auto">Comprar</button>
-        <div class="d-flex justify-content-center total font-weight-bold mt-2"><button class="btn btn-dark w-50 mx-auto" (click)="atras()">Volver</button></div>
-    </div>
+
+<div class="row py-2 mx-0 bg-dark">
+  <div class="col-12">
+    <app-search></app-search>
+  </div>
 </div>
+<div class="row mx-0">
+  <div class="col-12">
+    <div class="d-flex justify-content-center container my-5">
+      <div class="card p-3 bg-white shadow">
+        <h4 class="mx-auto" *ngIf="!isOwner && !userPurchasedImages.includes(image.filename)">Comprar imagen</h4>
+        <h4 class="mx-auto" *ngIf="!isOwner && userPurchasedImages.includes(image.filename)">Imagen comprada</h4>
+        <div class="about-product text-center mt-2"><img class="img-fluid rounded"
+            src="{{publicDirBack}}sample/{{imageFilename}}" width="600">
+          <div class="row mt-2">
+            <div class="col-12">
+              <h5><i class="fas fa-user"></i> <a href="/user/{{image.creatorUsername}}"> {{image.creatorUsername}}</a>
+              </h5>
+            </div>
+            <div class="col-6">
+              <h6 class="mt-0 text-black-50 text-right pr-1">Dimensiones:<br>Formato:<br>Categoría:</h6>
+            </div>
+            <div class="col-6">
+              <h6 class="mt-0 text-black-50 text-left pl-1">
+                {{image.width}}x{{image.height}}<br>{{image.format}}<br>{{image.categoryName}}</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="mx-auto bg-light" *ngIf="mensaje">
+          <h5 class="text-center bg-success rounded p-2" *ngIf="compraRealizada">
+            {{mensaje}}
+          </h5>
+          <h5 class="text-center bg-danger rounded p-2" *ngIf="!compraRealizada">
+            {{mensaje}}
+          </h5>
+        </div>
+
+        <div class="w-100 mx-auto text-center" *ngIf="userPurchasedImages.includes(image.filename)">
+          <!--Imagen comprada, opción de descargar-->
+          <h2 class="h2">Esta imagen es tuya</h2>
+          <div class="d-flex justify-content-center total font-weight-bold mt-2">
+            <button type="button" class="btn btn-primary w-50 mx-auto" (click)="descargar()">Descargar</button>
+          </div>
+          <div class="d-flex justify-content-center total font-weight-bold mt-2">
+            <button class="btn btn-dark w-50 mx-auto" (click)="atras()">Volver</button>
+          </div>
+        </div>
+
+        <div class="w-100" *ngIf="!comprando && !confirmandoCompra && !userPurchasedImages.includes(image.filename)">
+          <!--Caja con precio y botones volver y comprar-->
+          <h1 class="mx-auto font-weight-bold mt-4 mb-2 text-center"><span
+              class="badge badge-secondary">{{image.price}}€</span>
+          </h1>
+          <div class="d-flex justify-content-center total font-weight-bold mt-2">
+            <button class="btn btn-success w-50 mx-auto" [disabled]="isOwner" title="{{hoverBuyText}}"
+              (click)="comprar()">Comprar</button>
+          </div>
+          <div class="d-flex justify-content-center total font-weight-bold mt-2">
+            <button class="btn btn-dark w-50 mx-auto" (click)="atras()">Volver</button>
+          </div>
+        </div>
+
+        <div class="border rounded bg-light w-50 mx-auto text-center" *ngIf="comprando && !confirmandoCompra">
+          <!--Caja con precio, saldo y botones de confirmar compra o cancelar-->
+          <h1 class="mx-auto font-weight-bold mt-2 mb-2 text-center"><span
+              class="badge badge-secondary">{{image.price}}€</span>
+          </h1>
+          <h5 class="h5 mt-3">Tu saldo: <span class="border rounded bg-white px-1">{{this.loginService.balance}}€</span></h5>
+          <div class="w-100 px-2 mb-2">
+            <button type="button" class="btn btn-success d-inline w-25 mr-1" (click)="aceptar()">Comprar</button>
+            <button type="button" class="btn btn-dark d-inline w-25 ml-1" (click)="cancelar()">Cancelar</button>
+          </div>
+        </div>
+
+        <div class="border rounded bg-light w-50 mx-auto text-center" *ngIf="comprando && confirmandoCompra">
+          <!--Caja con precio, saldo y botones de confirmar compra o cancelar-->
+          <h1 class="mx-auto font-weight-bold mt-2 mb-2 text-center"><span
+              class="badge badge-secondary">{{image.price}}€</span>
+          </h1>
+          <h5 class="h5 mt-3">Tu saldo: <span class="border rounded bg-white px-1">{{this.loginService.balance}}€</span></h5>
+          <div class="w-100 px-2 mb-2">
+            <h2 class="h2">¿Estás seguro?</h2>
+            <button type="button" class="btn btn-success d-inline w-25 mr-1" (click)="confirmarCompra()">SI</button>
+            <button type="button" class="btn btn-danger d-inline w-25 ml-1" (click)="cancelar()">NO</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-footer></app-footer>
