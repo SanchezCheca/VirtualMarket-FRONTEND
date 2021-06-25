@@ -25,7 +25,7 @@ export class SearchService {
   }
 
   /**
-   * Devuelve una lista con todas las categorías exsistentes y sus respectivos ids
+   * Devuelve una lista con todas las categorías existentes y sus respectivos ids
    */
   public getCategories() {
     const url = environment.dirBack + "search/getCategories";
