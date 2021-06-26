@@ -13,7 +13,7 @@ import { PurchaseService } from 'src/app/services/purchase.service';
 })
 export class ImageProductComponent implements OnInit {
 
-  saldo: any;
+  balance: any;
 
   userPurchasedImages: any[] = [];
   compraRealizada: boolean;
@@ -27,11 +27,11 @@ export class ImageProductComponent implements OnInit {
 
   isOwner: boolean; //Define si el usuario que está viendo la imagen es su propietario
 
-  constructor(private purchaseService: PurchaseService, public loginService: LoginService, private route: ActivatedRoute, private router: Router, private location: Location, private searchService: SearchService) {
+  constructor(private purchaseService: PurchaseService, private loginService: LoginService, private route: ActivatedRoute, private router: Router, private location: Location, private searchService: SearchService) {
     this.compraRealizada = false;
     this.mensaje = '';
     this.confirmandoCompra = false;
-    this.saldo = this.loginService.getUser().balance;
+    this.balance = this.loginService.getUser().balance;
     this.comprando = false;
     this.isOwner = false;
 

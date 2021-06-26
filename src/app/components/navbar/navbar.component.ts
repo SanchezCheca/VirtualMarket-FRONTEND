@@ -17,8 +17,9 @@ export class NavbarComponent implements OnInit {
 
   user: any;
   logged: boolean;
+  balance: any;
 
-  constructor(public loginService: LoginService) {
+  constructor(private loginService: LoginService) {
     this.logged = false;
     this.user = loginService.getUser();
     if (this.user.profileImage == null) {
@@ -31,6 +32,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     if (this.loginService.isUserSignedIn()) {
       this.logged = true;
+      this.balance = this.user.balance;
     }
   }
 
