@@ -1,37 +1,62 @@
 <app-navbar></app-navbar>
 <div class="row mt-4 w-100 mx-0 mb-5">
-    <div class="col-12 col-lg-4 col-md-6 text-center mx-auto border rounded p-2">
-        <h3 class="h3">Subir imagen</h3>
-        <div *ngIf="message">
-            {{message}}
-        </div>
-        <img *ngIf="imageSrc != ''" id="blah" [src]="imageSrc" alt="Vista previa" width="100%" class="mb-2" />
-
-        <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
-            <input type="file" class="file-upload" id="image" formControlName="image" id="image" (change)="saveImage($event)" />
-            <div class="error" *ngIf="submitted && form.image.errors">
-              <div class="w-50 rounded bg-danger text-center mx-auto p-1 my-1 d-inline" *ngIf="form.image.errors.required">Este campo es obligatorio</div>
-            </div>
-            <div *ngIf="uploadProgress" class="progress my-2">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: {{uploadProgress}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <input type="number" step="any" class="form-control my-2" id="price" formControlName="price" placeholder="Precio"/>
-            <div class="error" *ngIf="submitted && form.price.errors">
-              <div class="w-50 rounded bg-danger text-center mx-auto p-1 my-1 d-inline" *ngIf="form.price.errors.required">Este campo es obligatorio</div>
-            </div>
-            <select class="form-control custom-select" name="category" id="category" placeholder="Categoría" formControlName="category" [(ngModel)]="imageData.category">
-              <option value="1" hidden selected>Categoría</option>
-              <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
-            </select>
-
-            <input type="text" class="form-control my-2" id="tags" formControlName="tags" placeholder="Etiquetas (separadas por coma)" />
-            <div class="error" *ngIf="submitted && form.tags.errors">
-              <div class="w-50 rounded bg-danger text-center mx-auto p-1 my-1 d-inline" *ngIf="form.tags.errors.required">Este campo es obligatorio</div>
-            </div>
-            <button class="btn btn-dark mt-2 mx-auto w-100">Subir</button>
-        </form>
-
+  <div class="col-12 col-lg-4 col-md-6 text-center mx-auto border rounded p-2">
+    <h3 class="h3">Subir imagen</h3>
+    <div *ngIf="message">
+      {{message}}
     </div>
+    <img *ngIf="imageSrc != ''" id="blah" [src]="imageSrc" alt="Vista previa" width="50%" class="img-fluid mx-auto rounded" class="mb-2" />
+
+    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+      <!--Selector de imagen-->
+      <div *ngIf="uploadProgress == 0 && !processing" class="custom-file">
+        <input type="file" class="custom-file-input" id="image" formControlName="image" id="image"
+        (change)="saveImage($event)" lang="es"/>
+        <label class="custom-file-label" for="customFile">{{this.fileName}}</label>
+      </div>
+      <div class="error" *ngIf="submitted && form.image.errors">
+        <div class="w-50 rounded bg-danger text-center mx-auto p-1 my-1 d-inline" *ngIf="form.image.errors.required">
+          Este campo es obligatorio</div>
+      </div>
+
+      <!--Barra de progreso y spinner de proceso-->
+      <div *ngIf="uploadProgress" class="progress my-2">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+          style="width: {{uploadProgress}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <div *ngIf="processing" class="my-2">
+        <div class="spinner-border text-success"></div>
+        Procesando imagen...
+      </div>
+
+      <!--Precio-->
+      <input type="number" step="any" class="form-control my-2" id="price" formControlName="price"
+        placeholder="Precio" />
+      <div class="error" *ngIf="submitted && form.price.errors">
+        <div class="w-50 rounded bg-danger text-center mx-auto p-1 my-1 d-inline" *ngIf="form.price.errors.required">
+          Este campo es obligatorio</div>
+      </div>
+
+      <!--Categoría-->
+      <select class="form-control custom-select" name="category" id="category" placeholder="Categoría"
+        formControlName="category" [(ngModel)]="imageData.category">
+        <option value="1" hidden selected>Categoría</option>
+        <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+      </select>
+
+      <!--Etiquetas-->
+      <input type="text" class="form-control my-2" id="tags" formControlName="tags"
+        placeholder="Etiquetas (separadas por coma)" />
+      <div class="error" *ngIf="submitted && form.tags.errors">
+        <div class="w-50 rounded bg-danger text-center mx-auto p-1 my-1 d-inline" *ngIf="form.tags.errors.required">Este
+          campo es obligatorio</div>
+      </div>
+
+      <!--Botón subir-->
+      <button class="btn btn-dark mt-2 mx-auto w-100">Subir</button>
+    </form>
+
+  </div>
 
 </div>
 <app-footer></app-footer>

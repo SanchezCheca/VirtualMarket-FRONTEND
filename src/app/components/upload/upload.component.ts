@@ -19,7 +19,9 @@ export class UploadComponent implements OnInit {
   submitted = false;
   message: string;
 
+  processing: boolean;
   uploadProgress: number;
+  fileName: string;
 
   categories: any[];
   imageData: any;
@@ -39,6 +41,8 @@ export class UploadComponent implements OnInit {
       'category': 1
     };
     this.imageSrc = '';
+    this.processing = false;
+    this.fileName = 'Selecciona un archivo';
   }
 
   get form() { return this.uploadForm.controls; }
@@ -73,6 +77,8 @@ export class UploadComponent implements OnInit {
    * @param event
    */
   saveImage(event: any) {
+    this.fileName = <string>event.target.files[0].name;
+
     this.image = <File>event.target.files[0];
 
     const reader = new FileReader();
@@ -100,9 +106,18 @@ export class UploadComponent implements OnInit {
         (event: any) => {
           if (event.type == HttpEventType.UploadProgress) {
             this.uploadProgress = Math.round(100 * (event.loaded / event.total));
+            if (this.uploadProgress == 100) {
+              this.uploadProgress = 0;
+              this.processing = true;
+            }
           }
           if (event.type == HttpEventType.Response) {
-            this.message = event.body.message.message;
+            //Hay respuesta
+            if (event.body.message.exito) {
+              this.router.navigate(['/image/' + event.body.message.filename]);
+            } else {
+              this.message = 'Ha ocurrido algún error';
+            }
           }
         }
       );
