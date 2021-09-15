@@ -33,13 +33,15 @@ export class LoginService {
 
   //Check if user is logged and stores its data
   public isUserSignedIn() {
-    return !_.isEmpty(sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY));
+    return !_.isEmpty(localStorage.getItem(LoginService.SESSION_STORAGE_KEY));
+    //return !_.isEmpty(sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY));
   }
 
   //Stores user data in session
   public saveUser(user: any) {
     //this.balance = user.balance;
-    sessionStorage.setItem(LoginService.SESSION_STORAGE_KEY, JSON.stringify(user));
+    //sessionStorage.setItem(LoginService.SESSION_STORAGE_KEY, JSON.stringify(user));
+    localStorage.setItem(LoginService.SESSION_STORAGE_KEY, JSON.stringify(user));
   }
 
   //If user is logged, returns its object
@@ -55,7 +57,8 @@ export class LoginService {
       purchasedImages: []
     };
     if (this.isUserSignedIn()) {
-      user = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);
+      user = localStorage.getItem(LoginService.SESSION_STORAGE_KEY);
+      //user = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);
       user = JSON.parse(user);
     }
 
@@ -76,7 +79,8 @@ export class LoginService {
       profileImage: "/assets/img/defaultUserImage.png"
     };
     if (this.isUserSignedIn()) {
-      user = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);
+      //user = sessionStorage.getItem(LoginService.SESSION_STORAGE_KEY);
+      user = localStorage.getItem(LoginService.SESSION_STORAGE_KEY);
       user = JSON.parse(user);
       if (profileImage != '') {
         user.profileImage = profileImage;
@@ -91,7 +95,8 @@ export class LoginService {
 
   //Deletes Access Token from session
   public logout() {
-    sessionStorage.removeItem(LoginService.SESSION_STORAGE_KEY);
+    //sessionStorage.removeItem(LoginService.SESSION_STORAGE_KEY);
+    localStorage.removeItem(LoginService.SESSION_STORAGE_KEY);
   }
 
   public reducirBalance(cantidad: any) {

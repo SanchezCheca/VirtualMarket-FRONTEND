@@ -24,6 +24,7 @@ export class ImageProductComponent implements OnInit {
   image: any;
   publicDirBack: any;
   hoverBuyText: any;
+  user: any;
 
   isOwner: boolean; //Define si el usuario que está viendo la imagen es su propietario
 
@@ -52,10 +53,10 @@ export class ImageProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let user = this.loginService.getUser();
-    if (user.purchasedImages) {
-      for (let index = 0; index < user.purchasedImages.length; index++) {
-        this.userPurchasedImages.push(user.purchasedImages[index].filename);
+    this.user = this.loginService.getUser();
+    if (this.user.purchasedImages) {
+      for (let index = 0; index < this.user.purchasedImages.length; index++) {
+        this.userPurchasedImages.push(this.user.purchasedImages[index].filename);
       }
     }
 

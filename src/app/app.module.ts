@@ -22,6 +22,7 @@ import { SearchResultComponent } from './components/search-result/search-result.
 import { ImageProductComponent } from './components/image-product/image-product.component';
 import { MyPurchasesComponent } from './components/my-purchases/my-purchases.component';
 import { CrudComponent } from './components/crud/crud.component';
+import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CrudComponent } from './components/crud/crud.component';
     ImageProductComponent,
     MyPurchasesComponent,
     CrudComponent,
+    AdminMenuComponent,
   ],
   imports: [
     BrowserModule,
