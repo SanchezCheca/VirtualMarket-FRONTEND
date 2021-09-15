@@ -107,7 +107,11 @@ export class ImageProductComponent implements OnInit {
 
   //Botón "Comprar"
   comprar() {
-    this.comprando = true;
+    if (this.loginService.isUserSignedIn()) {
+      this.comprando = true;
+    } else {
+      this.router.navigate(['login']);
+    }
   }
 
   //Botón "Atrás"
