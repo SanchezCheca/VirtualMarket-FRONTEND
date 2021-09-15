@@ -31,7 +31,8 @@ export class ImageProductComponent implements OnInit {
     this.compraRealizada = false;
     this.mensaje = '';
     this.confirmandoCompra = false;
-    this.balance = this.loginService.getUser().balance;
+    this.balance = 0;
+    //this.balance = this.loginService.getUser().balance;
     this.comprando = false;
     this.isOwner = false;
 

@@ -17,22 +17,23 @@ export class NavbarComponent implements OnInit {
 
   user: any;
   logged: boolean;
-  balance: any;
+  //balance: any;
 
-  constructor(private loginService: LoginService) {
+  constructor(public loginService: LoginService) {
     this.logged = false;
-    this.user = loginService.getUser();
+    
+  }
+
+  ngOnInit(): void {
+    this.user = this.loginService.getUser();
+    console.log(this.user);
     if (this.user.profileImage == null) {
       this.user.profileImage = '/assets/img/defaultUserImage.png';
     } else {
       this.user.profileImage = environment.publicDirBack + 'profileImage/' + this.user.profileImage;
     }
-  }
-
-  ngOnInit(): void {
     if (this.loginService.isUserSignedIn()) {
       this.logged = true;
-      this.balance = this.user.balance;
     }
   }
 

@@ -15,8 +15,6 @@ import * as _ from "lodash";
 
 export class LoginService {
 
-  public balance: any;
-
   //Login data is stored in session
   public static readonly SESSION_STORAGE_KEY: string = "apiPassport";
 
@@ -40,7 +38,7 @@ export class LoginService {
 
   //Stores user data in session
   public saveUser(user: any) {
-    this.balance = user.balance;
+    //this.balance = user.balance;
     sessionStorage.setItem(LoginService.SESSION_STORAGE_KEY, JSON.stringify(user));
   }
 
@@ -61,7 +59,7 @@ export class LoginService {
       user = JSON.parse(user);
     }
 
-    this.balance = user.balance;
+    //this.balance = user.balance;
     return user;
   }
 
@@ -86,7 +84,7 @@ export class LoginService {
       user.name = name;
       user.email = email;
       user.about = about;
-      this.balance = user.balance;
+      //this.balance = user.balance;
       this.saveUser(user);
     }
   }
