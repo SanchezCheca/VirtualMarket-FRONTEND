@@ -1,5 +1,15 @@
+$color-principal-navbar: #B5D572;
+$color-boton-images: #FF5C6C;
+$color-images-hover: rgb(214, 63, 63);
+$color-boton-videos: #D6920A;
+$color-videos-hover: rgb(180, 166, 42);
+
+.nav-link {
+    color: black !important;
+}
+
 .bg-nav {
-    background-color: #97e497;
+    background-color: $color-principal-navbar;
 }
 
 .dropdown-item:active {
@@ -21,4 +31,70 @@
     width: 2em;
     object-fit: cover;
     border-radius: 50%;
+}
+
+
+
+/* HOVER EN EL MENÚ DE NAVEGACIÓN */
+@media all and (min-width: 992px) {
+    .navbar .nav-item .elementoNav{ display: none; }
+	/*.navbar .nav-item:hover .nav-link{   }*/
+	.navbar .nav-item:hover .elementoNav{ display: block; }
+	.navbar .nav-item .elementoNav{ margin-top:0; }
+
+    /* ALTURA PARA EL NAVBAR SOLO EN PANTALLAS GRANDES */
+    .bg-nav {
+        height: 6vh;
+    }
+
+    /* 100% DE ALTURA PARA LOS DESPLEGABLES SUPERIORES */
+    .elementoNavSuperior {
+        height: 4.5vh;
+    }
+
+    .elementoNavSuperior li a {
+        margin-top: 0.4vh;
+    }
+    
+    /* ELIMINA EL PADDING */
+    nav {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+/* PANTALLAS CON EL MENU CONTRAIDO */
+@media all and (max-width: 992px) {
+    .elementoNavSuperior li a {
+        margin-top: 0;
+        margin-left: 10px;
+    }
+}
+
+/* BOTONES DE SECCIONES */
+.elementoNavSuperior li {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* COLOR DE FONDO PARA DESPLEGABLE DE IMÁGENES */
+.elementoNavSuperiorImagenes {
+    background-color: $color-boton-images;
+}
+
+.elementoNavSuperiorImagenes:hover {
+    background-color: $color-images-hover;
+}
+
+/* COLOR DE FONDO PARA DESPLEGABLE DE VÍDEOS */
+.elementoNavSuperiorVideos {
+    background-color: $color-boton-videos;
+}
+
+.elementoNavSuperiorVideos:hover {
+    background-color: $color-videos-hover;
+}
+
+.elementoNavSuperior li a {
+    color: white !important;
 }

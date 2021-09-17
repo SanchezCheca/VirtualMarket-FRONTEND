@@ -3,20 +3,34 @@
     <span class="navbar-toggler-icon"></span>
   </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <a class="navbar-brand" href="">VirtualMarket</a>
+        <a class="navbar-brand mr-5" href="">iArtio</a>
 
-        <ul class="navbar-nav mt-2 mt-lg-0 mr-auto">
-          <!--
-            <li class="nav-item dropdown">
+        <!--DESPLEGABLE IMÁGENES-->
+        <ul class="navbar-nav mt-2 mx-3 mt-lg-0 elementoNavSuperior">
+            <li class="nav-item dropdown elementoNavSuperiorImagenes rounded-pill">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Imágenes
             </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div class="dropdown-menu elementoNav" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Fotografías</a>
                     <a class="dropdown-item" href="#">Ilustraciones</a>
                     <a class="dropdown-item" href="#">Imágenes vectoriales</a>
                 </div>
-            </li>-->
+            </li>
+        </ul>
+
+        <!--DESPLEGABLE VÍDEOS-->
+        <ul class="navbar-nav mt-2 mt-lg-0 mr-auto elementoNavSuperior">
+            <li class="nav-item dropdown elementoNavSuperiorVideos rounded-pill">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Vídeos
+            </a>
+                <div class="dropdown-menu elementoNav" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Hola</a>
+                    <a class="dropdown-item" href="#">Que</a>
+                    <a class="dropdown-item" href="#">Tal</a>
+                </div>
+            </li>
         </ul>
 
         <ul *ngIf="logged" class="navbar-nav">

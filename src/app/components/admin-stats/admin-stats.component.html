@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<div class="row mx-0">
+    <div class="col-12 my-2">
+        <p class="h3 text-center mx-auto">Estadísticas</p>
+    </div>
+    
+    <!-- NÚMERO DE USUARIOS TOTALES -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            nº total de usuarios</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{this.stats.totalUsers | number: '1.0-2'}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NÚMERO DE IMÁGENES -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            nº total de imágenes</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{this.stats.totalImages | number: '1.0-2'}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-image fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NÚMERO DE COMPRAS -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            nº total de compras</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{this.stats.totalPurchases | number: '1.0-2'}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DINERO TOTAL DE LAS COMPRAS -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Dinero total de las compras</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{this.stats.totalMoneyMoved | number: '1.0-2'}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-euro-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COSTE MEDIO POR IMAGEN a-->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Coste medio por imagen vendida</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{this.stats.averagePurchasePrice | number: '1.0-2'}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-euro-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<app-footer></app-footer>
