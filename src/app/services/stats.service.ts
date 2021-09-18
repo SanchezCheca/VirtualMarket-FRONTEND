@@ -11,13 +11,13 @@ export class StatsService {
 
   constructor(private http: HttpClient, private router: Router, private loginService: LoginService) { }
 
-  public getStats() {
+  public getStats(date:String) {
     const url = environment.dirBack + "getAdminStats";
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
-    let respuesta = this.http.get(url, { headers: headers });
+    let respuesta = this.http.post(url, {'date' : date}, { headers: headers });
     return respuesta;
   }
 
