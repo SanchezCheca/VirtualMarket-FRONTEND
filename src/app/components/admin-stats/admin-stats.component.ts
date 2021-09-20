@@ -20,6 +20,9 @@ export class AdminStatsComponent implements OnInit {
   dateOption: any;
   selectForm: FormGroup;
 
+  tituloGraficaImagenesPublicadas: String = "";
+  tituloGraficaCompras: String = "";
+
   constructor(private formBuilder: FormBuilder, private router: Router, private statsService: StatsService) {
     this.dateOp = [
       {
@@ -49,50 +52,52 @@ export class AdminStatsComponent implements OnInit {
 
   get form() { return this.selectForm.controls; }
 
-  ngOnInit(): void {
-    this.statsService.getStats(this.dateOp[0].id).subscribe(
-      (response: any) => {
-        this.stats = response.message;
-
-        this.actualizarTablaImagenesPublicadas(response.message.datosT[1],response.message.datosT[0]);
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
-  }
-
-  //---------DATOS CHART LINEAL (IMÁGENES PUBLICADAS)
-  public lineChartData: ChartDataSets[] = [
+  //---------DATOS POR DEFECTO GRÁFICO Nº DE IMÁGENES SUBIDAS
+  public graficoImagenesData: ChartDataSets[] = [
     { data: [0, 0, 0, 0, 0, 0], label: 'Imágenes publicadas' },
   ];
-
-  public lineChartLabels: Label[] = ['0', '0', '0', '0', '0', '0'];
-
-  lineChartOptions = {
+  public graficoImagenesLabels: Label[] = ['0', '0', '0', '0', '0', '0'];
+  graficoImagenesOptions = {
     responsive: true,
   };
-
-  lineChartColors: Color[] = [
+  graficoImagenesColors: Color[] = [
     {
       borderColor: 'black',
       backgroundColor: '#FF5C6C',
     },
   ];
-  lineChartXAxisID = "Aaa=;";
-  lineChartLegend = true;
-  lineChartPlugins = [];
-  lineChartType = 'line' as ChartType;
+  graficoImagenesLegend = true;
+  graficoImagenesPlugins = [];
+  graficoImagenesType = 'line' as ChartType;
 
-  //--------SELECTOR DE RANGO DE FECHAS
-  onChange() {
-    let data = this.selectForm.value;
-    this.statsService.getStats(data.selectedDate).subscribe(
+  //---------DATOS POR DEFECTO GRÁFICO Nº DE COMPRAS
+  public graficoComprasData: ChartDataSets[] = [
+    { data: [0, 0, 0, 0, 0, 0], label: 'Imágenes publicadas' },
+  ];
+  public graficoComprasLabels: Label[] = ['0', '0', '0', '0', '0', '0'];
+  graficoComprasOptions = {
+    responsive: true,
+  };
+  graficoComprasColors: Color[] = [
+    {
+      borderColor: 'black',
+      backgroundColor: '#B5D572',
+    },
+  ];
+  graficoComprasLegend = true;
+  graficoComprasPlugins = [];
+  graficoComprasType = 'line' as ChartType;
+
+  //---------INICIALIZACIÓN
+  ngOnInit(): void {
+    this.statsService.getStats(this.dateOp[0].id).subscribe(
       (response: any) => {
+        //Carga las estadísticas del back
         this.stats = response.message;
-        console.log(response);
-
-        this.actualizarTablaImagenesPublicadas(response.message.datosT[1],response.message.datosT[0]);
+        this.actualizarTablaImagenesPublicadas(response.message.datosTImages[1], response.message.datosTImages[0]);
+        this.actualizarTablaCompras(response.message.datosTPurchases[1], response.message.datosTPurchases[0]);
+        this.tituloGraficaImagenesPublicadas = "Imágenes publicadas (nº de imágenes / hora del día de hoy)";
+        this.tituloGraficaCompras = "Compras (nº de compras / hora del día de hoy)";
       },
       (error: any) => {
         console.log(error);
@@ -100,12 +105,46 @@ export class AdminStatsComponent implements OnInit {
     );
   }
 
+  //--------SELECTOR DE RANGO DE FECHAS
+  onChange() {
+    let data = this.selectForm.value;
+    //Cambia el título de las gráficas
+    if (data.selectedDate == "today") {
+      this.tituloGraficaImagenesPublicadas = "Imágenes publicadas (nº de imágenes / hora del día de hoy)";
+      this.tituloGraficaCompras = "Compras (nº de compras / hora del día de hoy)";
+    } else {
+      this.tituloGraficaImagenesPublicadas = "Imágenes publicadas (nº de imágenes / día)";
+      this.tituloGraficaCompras = "Compras (nº de compras / día)";
+    }
+
+    //Carga los nuevos datos
+    this.statsService.getStats(data.selectedDate).subscribe(
+      (response: any) => {
+        this.stats = response.message;
+        this.actualizarTablaImagenesPublicadas(response.message.datosTImages[1], response.message.datosTImages[0]);
+        this.actualizarTablaCompras(response.message.datosTPurchases[1], response.message.datosTPurchases[0]);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  //-------ACTUALIZA LOS DATOS DE LA TABLA DE COMPRAS
+  actualizarTablaCompras(data: any[], labels: any[]) {
+    this.graficoComprasData = [
+      {data: data, label: 'Compras'},
+    ];
+
+    this.graficoComprasLabels = labels;
+  }
+
   //-------ACTUALIZA LOS DATOS DE LA TABLA DE IMÁGENES PUBLICADAS
   actualizarTablaImagenesPublicadas(data: any[], labels: any[]) {
-    this.lineChartData = [
+    this.graficoImagenesData = [
       { data: data, label: 'Imágenes publicadas' },
     ];
 
-    this.lineChartLabels = labels;
+    this.graficoImagenesLabels = labels;
   }
 }

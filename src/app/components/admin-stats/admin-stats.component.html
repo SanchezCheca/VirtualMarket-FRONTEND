@@ -129,15 +129,29 @@
 
 </div>
 
-<div class="row mx-0">
-    <div class="col-xl-4 col-md-8 mb-4">
+<div class="row mx-0 mt-4">
+    <!-- GRÁFICO Nº DE IMÁGENES PUBLICADAS -->
+    <div class="col-xl-4 col-md-8 mb-4 mx-auto">
+        <p class="h5 text-center">{{tituloGraficaImagenesPublicadas}}</p>        
         <div class="chart-wrapper">
-            <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
-                [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
-                [plugins]="lineChartPlugins">
+            <canvas baseChart [datasets]="graficoImagenesData" [labels]="graficoImagenesLabels" [options]="graficoImagenesOptions"
+                [colors]="graficoImagenesColors" [legend]="graficoImagenesLegend" [chartType]="graficoImagenesType"
+                [plugins]="graficoImagenesPlugins">
             </canvas>
         </div>
     </div>
+
+    <!-- GRÁFICO Nº DE COMPRAS -->
+    <div class="col-xl-4 col-md-8 mb-4 mx-auto">
+        <p class="h5 text-center">{{tituloGraficaCompras}}</p>        
+        <div class="chart-wrapper">
+            <canvas baseChart [datasets]="graficoComprasData" [labels]="graficoComprasLabels" [options]="graficoComprasOptions"
+                [colors]="graficoComprasColors" [legend]="graficoComprasLegend" [chartType]="graficoComprasType"
+                [plugins]="graficoComprasPlugins">
+            </canvas>
+        </div>
+    </div>
+
 </div>
 
 <app-footer></app-footer>
