@@ -5,6 +5,7 @@ import { AdminMenuComponent } from './components/admin-menu/admin-menu.component
 import { AdminStatsComponent } from './components/admin-stats/admin-stats.component';
 import { CrudComponent } from './components/crud/crud.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ImageModerationComponent } from './components/image-moderation/image-moderation.component';
 import { ImageProductComponent } from './components/image-product/image-product.component';
 import { IndexComponent } from './components/index/index.component';
 import { LoginComponent } from './components/login/login.component';
@@ -17,6 +18,7 @@ import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
   {path: 'image/:filename', component: ImageProductComponent},
+  {path: 'moderate', component: ImageModerationComponent},
   {path: 'crud', component: CrudComponent},
   {path: 'AdminStats', component: AdminStatsComponent},
   {path: 'admin', component: AdminMenuComponent},

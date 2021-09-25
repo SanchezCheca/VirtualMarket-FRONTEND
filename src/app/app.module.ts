@@ -25,6 +25,7 @@ import { CrudComponent } from './components/crud/crud.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 import { AdminStatsComponent } from './components/admin-stats/admin-stats.component';
 import { ChartsModule } from 'ng2-charts';
+import { ImageModerationComponent } from './components/image-moderation/image-moderation.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ChartsModule } from 'ng2-charts';
     MyPurchasesComponent,
     CrudComponent,
     AdminMenuComponent,
-    AdminStatsComponent
+    AdminStatsComponent,
+    ImageModerationComponent
   ],
   imports: [
     BrowserModule,
