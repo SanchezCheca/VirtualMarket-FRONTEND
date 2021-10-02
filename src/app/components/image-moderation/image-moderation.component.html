@@ -1,14 +1,48 @@
 <app-navbar></app-navbar>
+<div class="container">
 <div class="row mx-0">
     <div class="col-12 mt-3">
-        <p class="h3 text-center">
-            Moderar imágenes
+        <p class="h4 text-left">
+            Control de calidad
+        </p>
+        <p class="text-left mt-2">
+            Éstas son las últimas imágenes subidas a iArtio. Ayúdanos a decidir cuáles deberían ser publicadas. Puedes consultar nuestra <a href="#">guía de calidad.</a>
         </p>
     </div>
 </div>
-<div class="row mx-0">
-    <div class="col-12 mt-3">
-        
+<div class="row mx-0 mb-3">
+    <div class="col-12 ml-4 mb-0">
+        <p *ngIf="nImages==1" class="mb-0 d-inline">{{nImages}} imagen</p>
+        <p *ngIf="nImages!=1" class="mb-0 d-inline">{{nImages}} imágenes</p>
+        <p *ngIf="userStats != null" class="mb-0 ml-3 text-muted d-inline">Estadísticas <i class="arrow"></i></p>
     </div>
+    <div class="col-12">
+        <hr>
+    </div>
+    <div class="col-12 d-inline">
+        <div class="d-inline float-left mr-3 ml-4">
+            <form class="form-inline mb-2">
+                <button class="btn btn-outline-danger botonModerar rounded-circle" (click)="rechazar()"><i class="fas fa-times"></i></button>
+                <button class="btn btn-outline-success botonModerar rounded-circle ml-1" (click)="aceptar()"><i class="fas fa-check"></i></button>
+            </form>
+            <p class="text-muted textoReportar my-2"><i class="fas fa-flag"></i> Reportar</p>
+        </div>
+        <div class="d-inline">
+            <img *ngIf="image != null" class="img-fluid imagenAModerar" src="{{publicDirBack}}thumbnail/{{image.filename}}" width="600">
+        </div>
+    </div>
+    
+    <!--
+    <div class="col-12 col-md-2">
+        <form class="form-inline">
+            <button class="btn btn-outline-danger botonModerar rounded-circle" (click)="rechazar()"><i class="fas fa-times"></i></button>
+            <button class="btn btn-outline-success botonModerar rounded-circle ml-1" (click)="aceptar()"><i class="fas fa-check"></i></button>
+        </form>
+    </div>
+    <div class="col-12 col-md-10 text-left">
+        <img *ngIf="image != null" class="img-fluid imagenAModerar" src="{{publicDirBack}}thumbnail/{{image.filename}}" width="600">
+    </div>
+    -->
+</div>
 </div>
 <app-footer></app-footer>

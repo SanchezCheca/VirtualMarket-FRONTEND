@@ -1,0 +1,34 @@
+a {
+    color: green;
+}
+
+.botonModerar {
+    width: 40px;
+    height: 40px;
+}
+
+.imagenAModerar {
+    width: auto;
+    max-height: 60vh;
+}
+
+hr {
+    height: 1px !important;
+    margin-top: 6px !important;
+}
+
+.textoReportar {
+    font-size: 0.9em;
+}
+
+.arrow {
+    display: inline-block;
+    zoom: 1;
+    //*display: inline;
+    width: 0;
+    margin-bottom: 3px;
+    height: 0;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-top: 4px solid #777;
+}
