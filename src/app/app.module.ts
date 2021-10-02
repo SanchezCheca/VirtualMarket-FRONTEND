@@ -47,7 +47,7 @@ import { ImageModerationComponent } from './components/image-moderation/image-mo
     CrudComponent,
     AdminMenuComponent,
     AdminStatsComponent,
-    ImageModerationComponent
+    ImageModerationComponent,
   ],
   imports: [
     BrowserModule,

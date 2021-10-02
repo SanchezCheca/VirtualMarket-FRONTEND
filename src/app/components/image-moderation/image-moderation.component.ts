@@ -13,6 +13,7 @@ export class ImageModerationComponent implements OnInit {
   publicDirBack: string;
   nImages: number;
   userStats: any;
+  mostrandoStats = false;
 
   constructor(private moderationService: ModerationService) {
     this.publicDirBack = environment.publicDirBack;
@@ -21,6 +22,10 @@ export class ImageModerationComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargar();
+  }
+
+  mostrarStats() {
+    this.mostrandoStats = !this.mostrandoStats;
   }
 
   aceptar() {

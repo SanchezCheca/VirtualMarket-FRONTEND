@@ -14,7 +14,7 @@
     <div class="col-12 ml-4 mb-0">
         <p *ngIf="nImages==1" class="mb-0 d-inline">{{nImages}} imagen</p>
         <p *ngIf="nImages!=1" class="mb-0 d-inline">{{nImages}} imágenes</p>
-        <p *ngIf="userStats != null" class="mb-0 ml-3 text-muted d-inline">Estadísticas <i class="arrow"></i></p>
+        <p *ngIf="userStats != null" class="mb-0 ml-3 text-muted d-inline textoStats" (click)="mostrarStats()">Estadísticas <i class="arrow"></i></p>
     </div>
     <div class="col-12">
         <hr>
