@@ -25,6 +25,8 @@ export class ImageProductComponent implements OnInit {
   publicDirBack: any;
   hoverBuyText: any;
   user: any;
+  creatorData: any;
+  userRelationship: any;
 
   isOwner: boolean; //Define si el usuario que está viendo la imagen es su propietario
 
@@ -70,15 +72,35 @@ export class ImageProductComponent implements OnInit {
       }
     });
 
+    //Recupera la información de la imagen
     this.searchService.getImageInfo(this.imageFilename).subscribe(
       (response: any) => {
+        //----------------[VIRTUAL-60] Cambio en la página de compra
+        console.log(response);
+        this.image = response.message.image;
+        this.creatorData = response.message.creatorData;
+        this.userRelationship = response.message.userRelationship;
+
+        //Comprueba si el usuario logueado es el dueño de la imagen
+        if (this.loginService.isUserSignedIn()) {
+          this.isOwner = this.loginService.getUser().username.toLowerCase() == response.message.creatorData.username;
+          if (this.isOwner) {
+            this.hoverBuyText = '¡No puedes comprar tu propia imagen!';
+          } else {
+            this.hoverBuyText = 'Comprar imagen';
+          }
+        }
+
+        /*
+        console.log('RESPUESTA');
+        console.log(response);
         this.image = response.message;
         this.isOwner = this.loginService.getUser().username.toLowerCase() == this.image.creatorUsername.toLowerCase();
         if (this.isOwner) {
           this.hoverBuyText = '¡No puedes comprar tu propia imagen!';
         } else {
           this.hoverBuyText = 'Comprar imagen';
-        }
+        }*/
       },
       (error: any) => {
         console.log(error);

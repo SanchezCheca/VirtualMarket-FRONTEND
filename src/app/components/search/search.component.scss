@@ -13,6 +13,12 @@
     width: 100%;
 }
 
+@media all and (min-width: 992px) {
+    .barraBuscar {
+        width: 40% !important;
+    }
+}
+
 @media all and (max-width: 992px) {
     .barraBuscar {
         width: 75% !important;

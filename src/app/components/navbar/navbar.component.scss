@@ -1,10 +1,14 @@
-$color-principal-navbar: #C8E4CD;
-$color-boton-images: #EED7B8;
-$color-images-hover: rgb(214, 63, 63);
-$color-boton-videos: #BAD5F0;
-$color-videos-hover: rgb(180, 166, 42);
+$color-principal-navbar: #b0ff8e;
+$color-boton-images: #b0ff8e;
+$color-images-hover: #FFFF5C;
+$color-boton-videos: #b0ff8e;
+$color-videos-hover: #70E7FF;
 
 .nav-link {
+    color: black !important;
+}
+
+.botonCategoria {
     color: black !important;
 }
 
@@ -27,13 +31,11 @@ $color-videos-hover: rgb(180, 166, 42);
 }
 
 .perfilRedondo {
-    height: 2em;
-    width: 2em;
+    height: 2.3em;
+    width: 2.3em;
     object-fit: cover;
     border-radius: 50%;
 }
-
-
 
 /* HOVER EN EL MENÚ DE NAVEGACIÓN */
 @media all and (min-width: 992px) {
@@ -49,11 +51,11 @@ $color-videos-hover: rgb(180, 166, 42);
 
     /* 100% DE ALTURA PARA LOS DESPLEGABLES SUPERIORES */
     .elementoNavSuperior {
-        height: 4.5vh;
+        height: 6vh;
     }
 
     .elementoNavSuperior li a {
-        margin-top: 0.4vh;
+        margin-top: 0.9vh;
     }
     
     /* ELIMINA EL PADDING */
@@ -73,8 +75,8 @@ $color-videos-hover: rgb(180, 166, 42);
 
 /* BOTONES DE SECCIONES */
 .elementoNavSuperior li {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /* COLOR DE FONDO PARA DESPLEGABLE DE IMÁGENES */

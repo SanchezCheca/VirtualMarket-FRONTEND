@@ -58,10 +58,11 @@ export class SearchService {
   public getImageInfo(filename: string) {
     const url = environment.dirBack + "getImage/" + filename;
     let headers = new HttpHeaders({
+      Authorization: `Bearer ${this.loginService.getUser().access_token}`,
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*'
     });
-    let respuesta = this.http.get(url, { headers: headers });
+    let respuesta = this.http.post(url, {}, { headers: headers });
     return respuesta;
   }
 

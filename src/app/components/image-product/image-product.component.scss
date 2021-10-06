@@ -1,7 +1,11 @@
-.card {
-    width: 888px
-}
-
 a {
   color: black;
+  text-decoration: none;
+}
+
+.perfilRedondo {
+  height: 2.3em;
+  width: 2.3em;
+  object-fit: cover;
+  border-radius: 50%;
 }

@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container">
 <div class="row mx-0">
-    <div class="col-12 mt-3">
+    <div class="col-12 mt-4">
         <p class="h4 text-left">
             Control de calidad
         </p>
@@ -19,7 +19,7 @@
     <div class="col-12">
         <hr>
     </div>
-    <div class="col-12 d-inline">
+    <div *ngIf="nImages > 0" class="col-12 d-inline">
         <div class="d-inline float-left mr-3 ml-4">
             <form class="form-inline mb-2">
                 <button class="btn btn-outline-danger botonModerar rounded-circle" (click)="rechazar()"><i class="fas fa-times"></i></button>
@@ -31,18 +31,9 @@
             <img *ngIf="image != null" class="img-fluid imagenAModerar" src="{{publicDirBack}}thumbnail/{{image.filename}}" width="600">
         </div>
     </div>
-    
-    <!--
-    <div class="col-12 col-md-2">
-        <form class="form-inline">
-            <button class="btn btn-outline-danger botonModerar rounded-circle" (click)="rechazar()"><i class="fas fa-times"></i></button>
-            <button class="btn btn-outline-success botonModerar rounded-circle ml-1" (click)="aceptar()"><i class="fas fa-check"></i></button>
-        </form>
+    <div *ngIf="nImages == 0" class="col-12 d-inline text-center">
+        <i>No hay imágenes que moderar. ¡Hurra!</i>
     </div>
-    <div class="col-12 col-md-10 text-left">
-        <img *ngIf="image != null" class="img-fluid imagenAModerar" src="{{publicDirBack}}thumbnail/{{image.filename}}" width="600">
-    </div>
-    -->
 </div>
 </div>
 <app-footer></app-footer>

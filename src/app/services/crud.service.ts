@@ -14,7 +14,7 @@ export class CrudService {
     const url = environment.dirBack + 'getAllUsersData';
 
     let headers = new HttpHeaders({ Authorization: `Bearer ${this.loginService.getUser().access_token}`});
-
+    
     return this.http.post(url, {}, { headers: headers });
   }
 
